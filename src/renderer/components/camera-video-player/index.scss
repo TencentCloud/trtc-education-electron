@@ -1,0 +1,32 @@
+@import '../../assets/style/variables.scss';
+
+.trtc-edu-camera-video-player {
+  position: relative;
+
+  .video-content {
+    width: 100%;
+    height: auto;
+  }
+
+  .video-muted {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .video-op-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: $color-gray-8;
+
+    .user-info {
+      margin-left: 0.5rem;
+    }
+  }
+}

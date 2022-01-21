@@ -1,0 +1,102 @@
+@import '../../../assets/style/variables.scss';
+
+.body-view-microphone-speaker-selector {
+  background-color: transparent;
+}
+
+.trtc-edu-mic-speaker-selector {
+  position: relative;
+  background-color: transparent;
+
+  &.trtc-edu-top-to-bottom {
+    padding-top: 1rem;
+
+    .trtc-edu-device-select-popover {
+      border-radius: 0.5rem;
+      border: 0.125rem solid $color-gray-4;
+      padding-bottom: 1rem;
+    }
+
+    &::before {
+      content: '';
+      box-sizing: border-box;
+      display: block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 0.125rem solid $color-gray-4;
+      border-right: none;
+      border-bottom: none;
+      transform: translateX(-50%) rotate(45deg);
+      position: absolute;
+      left: 50%;
+      top: 0.25rem;
+      background-color: $color-gray-12;
+    }
+  }
+
+  &.trtc-edu-bottom-to-top {
+    padding-bottom: 1rem;
+
+    .trtc-edu-device-select-popover {
+      border-radius: 0.5rem;
+      border: 0.125rem solid $color-gray-4;
+      padding-bottom: 1rem;
+    }
+
+    &::after {
+      content: '';
+      box-sizing: border-box;
+      display: block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 0.125rem solid $color-gray-4;
+      border-right: none;
+      border-bottom: none;
+      transform: translateX(-50%) rotate(-135deg);
+      position: absolute;
+      left: 50%;
+      bottom: 0.3125rem;
+      background-color: $color-gray-12;
+    }
+  }
+
+  .trtc-edu-device-select-popover {
+    color: $color-gray-1;
+    background-color: $color-gray-12;
+
+    .trtc-edu-device-list-title {
+      padding: 0.125rem 0.5rem;
+      height: 2rem;
+      line-height: 2rem;
+    }
+
+    .trtc-edu-microphone-device-list,
+    .trtc-edu-speaker-device-list {
+      padding: 0;
+      list-style: none;
+
+      .trtc-edu-microphone-device-item,
+      .trtc-edu-speaker-device-item {
+        height: 2rem;
+        padding: 0 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $color-gray-8;
+        }
+      }
+
+      .trtc-edu-check-wrapper {
+        width: 2rem;
+        line-height: 0;
+      }
+
+      .trtc-edu-device-name {
+        line-height: 2rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}

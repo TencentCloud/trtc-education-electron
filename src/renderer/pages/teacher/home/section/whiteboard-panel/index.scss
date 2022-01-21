@@ -1,0 +1,21 @@
+@import '../../../../../assets/style/variables.scss';
+
+.whiteboard-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $color-gray-6;
+
+  #white-board {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  canvas {
+    background-color: $color-gray-1;
+  }
+}

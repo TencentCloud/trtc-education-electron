@@ -1,0 +1,18 @@
+{
+  "name": "trtc-education-electron",
+  "productName": "TRTC-Education-Electron",
+  "version": "1.0.0",
+  "description": "TRTC Education Electron based on Tencent RTC, Tencent IM and Electron for teachers and students interacting and coordinating remotely",
+  "main": "./dist/main/main.js",
+  "author": {
+    "name": "Tencent Cloud",
+    "url": "https://cloud.tencent.com/document/product/647"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/electron-rebuild.js",
+    "link-modules": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/link-modules.js",
+    "postinstall": "yarn electron-rebuild && yarn link-modules"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}

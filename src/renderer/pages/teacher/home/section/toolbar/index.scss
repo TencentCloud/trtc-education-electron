@@ -1,0 +1,9 @@
+@import '../../../../../assets/style/variables.scss';
+
+.trtc-edu-teacher-class-room-tool-bar {
+  .trtc-edu-vertical-line {
+    width: 0.0625rem;
+    height: 100%;
+    border-left: 0.0625rem solid $color-gray-3;
+  }
+}

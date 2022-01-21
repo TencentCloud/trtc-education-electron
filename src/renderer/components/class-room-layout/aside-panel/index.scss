@@ -1,0 +1,24 @@
+.trtc-edu-aside {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+
+  .trtc-edu-camera-video-player {
+    display: block;
+    width: 100%;
+    height: 10rem;
+
+    .video-muted {
+      width: 20rem;
+      height: 9.375rem;
+    }
+  }
+
+  .bottom {
+    width: 100%;
+    height: calc(100% - 10rem);
+    background-color: #1f1f1f;
+  }
+}
