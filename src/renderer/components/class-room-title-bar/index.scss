@@ -1,0 +1,19 @@
+@import '../../assets/style/variables.scss';
+
+.trtc-edu-class-room-title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 0.5rem;
+  color: $color-gray-1;
+
+  .app-version {
+    span {
+      margin-right: 0.5rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

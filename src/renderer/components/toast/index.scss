@@ -1,0 +1,13 @@
+.trtc-edu-snack-bar {
+  width: auto;
+  min-width: 20rem;
+
+  &:not(:first-child) {
+    margin-top: 50px;
+    position: absolute;
+  }
+
+  .trtc-edu-alert {
+    width: 100%;
+  }
+}

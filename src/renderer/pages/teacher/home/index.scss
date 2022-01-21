@@ -1,0 +1,105 @@
+@import '../../../assets/style/variables.scss';
+
+.trtc-class-room {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+
+  .class-room-header {
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    background-color: $color-gray-13;
+    -webkit-app-region: drag;
+
+    button {
+      -webkit-app-region: no-drag;
+      width: 2rem;
+      min-width: 2rem;
+      height: 2rem;
+      color: $color-gray-1;
+      cursor: pointer;
+
+      &:hover,
+      &:active {
+        color: $color-highlight-6;
+        svg {
+          transform: scale(1.3);
+        }
+      }
+    }
+
+    .trtc-edu-mini-title-bar {
+      padding: 0 0.5rem;
+      text-align: right;
+      line-height: 0;
+    }
+  }
+
+  .class-room-body {
+    height: calc(100% - 2rem);
+    display: flex;
+  }
+
+  .main-content {
+    &.whiteboard-mode {
+      width: calc(100% - 20rem);
+      position: relative;
+    }
+
+    &.screen-share-mode {
+      width: 100%;
+
+      .trtc-edu-camera-video-list.list-mode-vertical {
+        display: flex;
+        justify-content: center;
+
+        .video-list-content {
+          width: 15.375rem;
+        }
+
+        .trtc-edu-camera-video-player {
+          box-sizing: border-box;
+          padding: 0.125rem;
+          border: 1px solid $color-primary;
+          margin: 0.25rem 0;
+
+          .video-muted {
+            width: 100%;
+            height: 8.3125rem;
+          }
+
+          .video-op-bar {
+            width: calc(100% - 0.25rem);
+          }
+        }
+      }
+    }
+  }
+
+  .white-board {
+    height: calc(100% - 5rem);
+    width: 100%;
+  }
+
+  .class-room-footer {
+    position: absolute;
+    height: 5rem;
+    width: 100%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $color-gray-11;
+    display: flex;
+    justify-content: center;
+    border-right: 0.0625rem solid $color-gray-9;
+  }
+
+  .aside-content {
+    width: 20rem;
+    height: 100%;
+    background-color: $color-gray-11;
+  }
+}
