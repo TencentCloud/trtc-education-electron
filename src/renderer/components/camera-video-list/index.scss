@@ -1,0 +1,92 @@
+@import '../../assets/style/variables.scss';
+
+.trtc-edu-camera-video-list {
+  color: $color-gray-1;
+  background-color: $color-gray-13;
+}
+
+.trtc-edu-camera-video-list.list-mode-horizontal {
+  width: 100%;
+  height: 90px;
+  border-radius: 0.5rem;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+
+  .video-list-content {
+    display: inline-flex;
+    overflow: hidden;
+  }
+
+  &:hover {
+    .btn-go-left,
+    .btn-go-right {
+      display: flex;
+    }
+  }
+
+  .btn-go-left,
+  .btn-go-right {
+    display: none;
+    position: absolute;
+    top: 1.25rem;
+    color: $color-gray-1;
+    background-color: $color-gray-10;
+
+    .MuiSvgIcon-root {
+      font-weight: bold;
+    }
+
+    &:hover {
+      color: $color-highlight-6;
+      background-color: $color-gray-4;
+    }
+    &:active {
+      color: $color-highlight-6;
+      background-color: linear-gradient(
+        45deg,
+        $color-gray-13 0%,
+        $color-gray-1 90%
+      );
+    }
+  }
+  .btn-go-left {
+    left: 0;
+  }
+  .btn-go-right {
+    right: 0;
+  }
+
+  .trtc-edu-camera-video-player {
+    position: relative;
+
+    .video-content,
+    .video-muted {
+      width: 10rem;
+      height: 5.625rem;
+    }
+  }
+}
+
+.trtc-edu-camera-video-list.list-mode-vertical {
+  display: block;
+  height: 100%;
+
+  .video-list-content {
+    display: block;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+
+  .trtc-edu-camera-video-player {
+    display: block;
+    width: 100%;
+
+    .video-muted {
+      width: 20rem;
+      height: 9.375rem;
+    }
+  }
+}
