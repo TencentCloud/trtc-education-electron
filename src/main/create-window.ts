@@ -60,7 +60,15 @@ export async function createWindow(
     process.env.NODE_ENV === 'development' ||
     process.env.DEBUG_PROD === 'true'
   ) {
-    await installExtensions();
+    /**
+     * 安装 React 开发者工具时，需要访问 Chrome App Store，国内网络默认无法访问，
+     * 安装时会有超时的报错提示。
+     * 如果可以访问 Chrome App Store，可以取消下面一行代码的注释。
+     * 如果不能访问 Chrome App Store，仍然希望安装 React 开发者工具，可以尝试
+     * 以下链接中的方法：
+     * https://www.electronjs.org/docs/latest/tutorial/devtools-extension#manually-loading-a-devtools-extension
+     */
+    // await installExtensions();
   }
 
   const newWindowOptions = { ...defaultOptions, ...options };

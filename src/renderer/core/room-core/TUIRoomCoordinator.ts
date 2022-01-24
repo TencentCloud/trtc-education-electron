@@ -489,7 +489,8 @@ class TUIRoomCoordinator implements ITUIRoomCoordinator {
       const message = {
         cmd: ETUIRoomCoordinatorCommand.SendSpeechApplication,
         room_id: this.roomID,
-        receiver_id: userID,
+        sender_id: userID,
+        agree,
       };
       let tsResponse = null;
       if (agree) {
