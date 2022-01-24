@@ -245,12 +245,12 @@ class MainWindow extends BaseWindow {
       this.topToolbarWindow.show();
     }
 
+    // 教师端课堂窗口（白板窗口）进入屏幕分享模式
     if (this.teacherClassRoomWindow) {
       this.teacherClassRoomWindow.send(
         EUserEventNames.ON_START_SHARE_SCREEN_WINDOW,
         store.currentUser.sharingScreenInfo
       );
-      this.teacherClassRoomWindow.setAlwaysOnTop(true);
       this.teacherClassRoomWindow.enterScreenShareMode();
     }
   }
@@ -287,7 +287,6 @@ class MainWindow extends BaseWindow {
         EUserEventNames.ON_STOP_SHARE_SCREEN_WINDOW,
         null
       );
-      this.teacherClassRoomWindow.setAlwaysOnTop(false);
       this.teacherClassRoomWindow.enterWhiteboardMode();
     }
   }

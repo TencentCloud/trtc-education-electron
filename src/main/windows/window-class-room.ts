@@ -78,10 +78,17 @@ class ClassRoomWindow extends BaseWindow {
 
   enterScreenShareMode() {
     this.logger?.log(`${ClassRoomWindow.logPrefix}onEnterScreenShareMode`);
+    if (this.windowMode === EWindowMode.ScreenShare) {
+      this.logger?.debug(
+        `${ClassRoomWindow.logPrefix}onEnterScreenShareMode already in screen share mode, exit.`
+      );
+      return; // 已经进入屏幕分享模式，直接退出
+    }
     this.windowMode = EWindowMode.ScreenShare;
     if (this.browserWindow) {
-      this.browserWindow.setMinimumSize(VIDEO_LIST_WINDOW_WIDTH, HEADER_HEIGHT);
       this.browserWindow.setResizable(false);
+      this.browserWindow.setMinimumSize(VIDEO_LIST_WINDOW_WIDTH, HEADER_HEIGHT);
+      this.browserWindow.setAlwaysOnTop(true);
 
       const userCount = Object.keys(store.userMap).length || 1;
       this.videoListWindowHeight =
@@ -111,11 +118,12 @@ class ClassRoomWindow extends BaseWindow {
 
   private enterWhiteboardBounds() {
     if (this.browserWindow) {
-      this.browserWindow.setMinimumSize(1200, 640);
       this.browserWindow.setResizable(true);
+      this.browserWindow.setMinimumSize(1200, 640);
+      this.browserWindow.setAlwaysOnTop(false);
       if (this.whiteboardWindowBounds) {
         this.logger?.debug(
-          `${ClassRoomWindow.prelog}enterWhiteboardMode bounds:`,
+          `${ClassRoomWindow.prelog}enterWhiteboardBounds bounds:`,
           this.whiteboardWindowBounds
         );
         this.setBounds(this.whiteboardWindowBounds);
