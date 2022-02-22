@@ -1,6 +1,6 @@
 # 概述
 
-TRTC Education Electron 是一款在线课堂应用软件，支持一名老师给多名学生在线上课，一个课堂最多同时支持 300 人在线实时互动。如果开启旁路直播服务，可支持上万人在线观看。本应用软件基于[腾讯云实时音视频通信（Tencent Real-Time Communication, TRTC）](https://cloud.tencent.com/product/trtc)、[腾讯云即时通信（Tencent Instant Message, TIM）](https://cloud.tencent.com/product/im)</a>、Electron、React 和 Webpack 等构建。
+TRTC Education Electron 是一款在线课堂应用软件，支持一名老师给多名学生在线上课，一个课堂最多同时支持 300 人在线实时互动。如果开启旁路直播服务，可支持上万人在线观看。本应用软件基于[腾讯云实时音视频通信（Tencent Real-Time Communication, TRTC）](https://cloud.tencent.com/product/trtc)、[腾讯云即时通信（Tencent Instant Message, TIM）](https://cloud.tencent.com/product/im)、Electron、React 和 Webpack 等构建。
 
 # 立刻体验
 

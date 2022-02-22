@@ -8,14 +8,14 @@
   background-color: $color-white;
 
   .class-room-header {
-    height: 1.5rem;
-    line-height: 1.5rem;
+    height: 2rem;
+    line-height: 2rem;
     text-align: center;
-    background-color: $color-gray-9;
+    background-color: $color-gray-10;
   }
 
   .class-room-body {
-    height: calc(100% - 1.5rem);
+    height: calc(100% - 2rem);
     display: flex;
   }
 

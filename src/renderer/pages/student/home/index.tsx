@@ -351,6 +351,7 @@ function StudentHome() {
           classStartTime={startTime}
           teacherID={teacherID}
           roomID={currentUser.roomID}
+          userID={userID}
         />
       </header>
       <div className="class-room-body">

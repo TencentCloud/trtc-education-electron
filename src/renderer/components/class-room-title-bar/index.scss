@@ -6,8 +6,10 @@
   width: 100%;
   padding: 0 0.5rem;
   color: $color-gray-1;
+  font-size: 16px;
 
   .app-version {
+    line-height: 2rem;
     span {
       margin-right: 0.5rem;
 
@@ -15,5 +17,14 @@
         margin-right: 0;
       }
     }
+  }
+  .class-start-time {
+    line-height: 2rem;
+    font-size: 18px;
+  }
+  .class-chat-group {
+    line-height: 2rem;
+    font-size: 18px;
+    margin-right: -24rem;
   }
 }

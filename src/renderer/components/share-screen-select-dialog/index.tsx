@@ -4,9 +4,13 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import {
   TRTCScreenCaptureSourceInfo,
   TRTCScreenCaptureSourceType,
+  TRTCVideoQosPreference,
 } from 'trtc-electron-sdk/liteav/trtc_define';
 import Toast from '../toast';
 import { tuiRoomCore } from '../../core/room-core';
@@ -134,6 +138,64 @@ function ShareScreenSelection(props: ShareScreenSelectionProps) {
   );
 }
 
+function OptionalButton() {
+  const [state, setState] = useState({
+    systemSound: false,
+    netWorkFlow: false,
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+    if (event.target.checked) {
+      if (event.target.name === 'systemSound') {
+        // 采集整个系统的声音
+        tuiRoomCore.startSystemAudioLoopback();
+      }
+      if (event.target.name === 'netWorkFlow') {
+        tuiRoomCore.setVideoQosPreference(
+          TRTCVideoQosPreference.TRTCVideoQosPreferenceSmooth
+        );
+      }
+    } else {
+      if (event.target.name === 'systemSound') {
+        tuiRoomCore.stopSystemAudioLoopback();
+      }
+      if (event.target.name === 'netWorkFlow') {
+        tuiRoomCore.setVideoQosPreference(
+          TRTCVideoQosPreference.TRTCVideoQosPreferenceClear
+        );
+      }
+    }
+  };
+
+  return (
+    <FormGroup row>
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={state.systemSound}
+            onChange={handleChange}
+            name="systemSound"
+            color="primary"
+          />
+        }
+        label="同时共享电脑声音"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={state.netWorkFlow}
+            onChange={handleChange}
+            name="netWorkFlow"
+            color="primary"
+          />
+        }
+        label="视频流畅度优先"
+      />
+    </FormGroup>
+  );
+}
+
 interface ShareScreenSelectionDialogProps {
   show: boolean | false;
   onCancel: () => void;
@@ -175,10 +237,17 @@ function ShareScreenSelectionDialog(props: ShareScreenSelectionDialogProps) {
         <ShareScreenSelection onSelect={onSelect} appWindowIDs={appWindowIDs} />
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={handleConfirm}>
-          确认
-        </Button>
-        <Button onClick={onCancel}>取消</Button>
+        <div className="screen-sharing-selection-dialog-buttons">
+          <div className="screen-sharing-selection-dialog-choose">
+            <OptionalButton />
+          </div>
+          <div className="screen-sharing-selection-dialog-confirm">
+            <Button color="primary" onClick={handleConfirm}>
+              确认
+            </Button>
+            <Button onClick={onCancel}>取消</Button>
+          </div>
+        </div>
       </DialogActions>
     </Dialog>
   );

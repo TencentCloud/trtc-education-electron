@@ -842,6 +842,7 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
    * - TRTCVideoQosPreferenceClear : 弱网下保清晰，在遭遇弱网环境时，画面会尽可能保持清晰，但可能会更容易出现卡顿。
    */
   setVideoQosPreference(preference: TRTCVideoQosPreference) {
+    this.trtcService.setVideoQosPreference(preference);
     logger.debug(
       `${TUIRoomCore.logPrefix}setVideoQosPreference preference:`,
       preference,
