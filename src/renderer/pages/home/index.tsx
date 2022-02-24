@@ -22,6 +22,7 @@ function Home() {
   const logPrefix = '[Home]';
   const appVersion = `${buildPackageConfig.version}.${packageConfig.build.buildVersion}`;
   logger.log(`${logPrefix} appVersion:`, appVersion);
+  const chatNumber = useSelector((state: any) => state.user.chatNumber);
   const userID = useSelector((state: any) => state.user.userID);
   const roomID = useSelector((state: any) => state.user.roomID);
   const classType = useSelector((state: any) => state.user.classType);
@@ -163,6 +164,9 @@ function Home() {
         </div>
       </form>
       <div className="home-empty" />
+      <div className="home-qq-number">
+        如有任何问题可以联系我们，QQ&nbsp;群号：{chatNumber}
+      </div>
     </div>
   );
 }

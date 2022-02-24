@@ -27,6 +27,7 @@ export const userSlice = createSlice({
     name: '',
     isLogin: false,
     classType: 'education',
+    chatNumber: '695855795',
   },
   reducers: {
     initCurrentUserStore: (state, action) => {

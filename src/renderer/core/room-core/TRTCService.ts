@@ -9,6 +9,7 @@ import {
   TRTCAudioQuality,
   TRTCScreenCaptureSourceInfo,
   TRTCDeviceInfo,
+  TRTCVideoQosPreference,
 } from 'trtc-electron-sdk/liteav/trtc_define';
 import logger from '../../utils/logger';
 import { ETUIStreamType } from './types.d';
@@ -301,6 +302,10 @@ class TRTCService {
 
   enableAudioVolumeEvaluation(interval: number) {
     this.rtcCloud?.enableAudioVolumeEvaluation(interval);
+  }
+
+  setVideoQosPreference(preference: TRTCVideoQosPreference) {
+    this.rtcCloud?.setNetworkQosParam(preference);
   }
 
   /**

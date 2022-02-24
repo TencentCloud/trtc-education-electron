@@ -10,6 +10,15 @@
     overflow: scroll;
     background-color: #434343;
     overflow: auto;
+    .content-github-link {
+      margin: 1rem;
+      padding: 1rem;
+      width: 90%;
+      border: 1px solid pink;
+      border-radius: 2rem;
+      background-color: #fff;
+      color: #000;
+    }
   }
   .content-bottom-chat {
     word-wrap: break-word;

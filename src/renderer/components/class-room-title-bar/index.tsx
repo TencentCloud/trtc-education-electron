@@ -1,4 +1,6 @@
 import React from 'react';
+import GithubLink from '../toolbar-icon-buttons/github-link';
+import CopyNumber from '../toolbar-icon-buttons/copy-number';
 import logger from '../../utils/logger';
 import Time from '../class-room-title-time/index';
 import buildPackageConfig from '../../../../build/app/package.json';
@@ -8,7 +10,7 @@ import './index.scss';
 
 function ClassTitle(props: Record<string, any>) {
   const logPrefix = '[ClassTitle]';
-  const { classStartTime, teacherID, roomID } = props;
+  const { classStartTime, teacherID, roomID, userID, chatNumber } = props;
 
   const appVersion = `${buildPackageConfig.version}.${packageConfig.build.buildVersion}`;
   logger.log(`${logPrefix} appVersion:`, appVersion);
@@ -20,11 +22,24 @@ function ClassTitle(props: Record<string, any>) {
         <span className="version">SDK版本：{tuiRoomCore.getSDKVersion()}</span>
       </div>
       <div className="class-start-time">
-        {teacherID} 发起的在线课堂 {roomID} | &nbsp;已上课&nbsp;
-        <Time classStartTime={classStartTime} />
+        <span>老师：{teacherID} &nbsp;|&nbsp;</span>
+        <span>
+          课堂号：{roomID}
+          <CopyNumber number={roomID} userID={userID} />
+        </span>
+        <span>
+          | &nbsp;已上课&nbsp;
+          <Time classStartTime={classStartTime} />
+        </span>
       </div>
-      <div>
-        <span>QQ交流群：695855795</span>
+      <div className="class-chat-group">
+        <span>
+          QQ&nbsp;交流群： {chatNumber}
+          <CopyNumber number={chatNumber} userID={userID} />
+        </span>
+        <span>
+          <GithubLink />
+        </span>
       </div>
     </div>
   );
