@@ -59,6 +59,7 @@ function HomePage() {
   useTopToolbarEvent();
 
   const currentUser = useSelector((state: any) => state.user);
+  const chatNumber = useSelector((state: any) => state.user.chatNumber);
   const roomInfo = useSelector((state: any) => state.roomInfo);
   const cameraList = useSelector((state: any) => state.device.cameraList);
   const microphoneList = useSelector((state: any) => state.device.microphoneList); // eslint-disable-line
@@ -462,6 +463,7 @@ function HomePage() {
             classStartTime={startTime}
             teacherID={currentUser.userID}
             roomID={currentUser.roomID}
+            chatNumber={chatNumber}
           />
         ) : (
           <div className="trtc-edu-mini-title-bar">

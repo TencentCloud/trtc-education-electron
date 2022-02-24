@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { ipcMain, systemPreferences } from 'electron';
 import { EUserEventNames } from '../../constants';
 import Logger, { setLogLevel } from '../logger';
 import { createWindow } from '../create-window';
@@ -72,6 +72,29 @@ class MainWindow extends BaseWindow {
     this.browserWindow.on('closed', this.destroy);
   }
 
+  private async checkAndApplyDevicePrivilege() {
+    const cameraPrivilege = systemPreferences.getMediaAccessStatus('camera');
+    this.logger?.debug(
+      `${MainWindow.preLog}checkAndApplyDevicePrivilege before apply cameraPrivilege: ${cameraPrivilege}`
+    );
+    if (cameraPrivilege !== 'granted') {
+      await systemPreferences.askForMediaAccess('camera');
+    }
+
+    const micPrivilege = systemPreferences.getMediaAccessStatus('microphone');
+    this.logger?.debug(
+      `${MainWindow.preLog}checkAndApplyDevicePrivilege before apply micPrivilege: ${micPrivilege}`
+    );
+    if (micPrivilege !== 'granted') {
+      await systemPreferences.askForMediaAccess('microphone');
+    }
+
+    const screenPrivilege = systemPreferences.getMediaAccessStatus('screen');
+    this.logger?.debug(
+      `${MainWindow.preLog}checkAndApplyDevicePrivilege before apply screenPrivilege: ${screenPrivilege}`
+    );
+  }
+
   // 老师进入课堂
   async onTeacherEnterClassRoom(event: any, args: any): Promise<boolean> {
     this.logger?.log(
@@ -79,6 +102,7 @@ class MainWindow extends BaseWindow {
       args
     );
     try {
+      await this.checkAndApplyDevicePrivilege();
       if (this.teacherClassRoomWindow) {
         return false; // 防御按钮二次点击导致重复创建
       }
@@ -118,6 +142,7 @@ class MainWindow extends BaseWindow {
       args
     );
     try {
+      await this.checkAndApplyDevicePrivilege();
       if (this.studentClassRoomWindow) {
         return false; // 防御按钮二次点击导致重复创建
       }

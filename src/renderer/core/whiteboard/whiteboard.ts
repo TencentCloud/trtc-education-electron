@@ -160,7 +160,7 @@ class Whiteboard {
     }
   }
 
-  addAction(action: ActionMemento) {
+  private addAction(action: ActionMemento) {
     // eslint-disable-next-line no-plusplus
     this.actionMemeQueue[++this.currentActionMemeIndex] = action;
 

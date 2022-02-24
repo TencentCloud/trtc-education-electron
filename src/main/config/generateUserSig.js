@@ -57,10 +57,10 @@ module.exports = function genTestUserSig(userID) {
   const BIZID = 0;
   const LIVE_DOMAIN = '';
 
-  // a soft reminder to guide developer to configure sdkAppId/secretKey
+  // A reminder to guide developer to configure sdkAppId/secretKey
   if (SDKAPPID === '' || SECRETKEY === '') {
     alert(
-      `请先配置好您的账号信息： SDKAPPID 及 SECRETKEY ${+'\r\n\r\nPlease configure your SDKAPPID/SECRETKEY in js/debug/GenerateTestUserSig.js'}`
+      '请先配置好您的账号信息： SDKAPPID 及 SECRETKEY \r\n\r\nPlease configure your SDKAPPID/SECRETKEY in src\main\config\generateUserSig.js'
     );
   }
   const generator = new LibGenerateTestUserSig(SDKAPPID, SECRETKEY, EXPIRETIME);

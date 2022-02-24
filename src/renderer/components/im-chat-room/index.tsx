@@ -1,4 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
+import GithubLink from '../toolbar-icon-buttons/github-link';
+import OfficialWebsiteLink from '../toolbar-icon-buttons/offical-website-link';
 import logger from '../../utils/logger';
 import './index.scss';
 
@@ -36,6 +38,19 @@ function BottomIm(props: Record<string, any>) {
   return (
     <div className="im-content">
       <div className="content-top-chat">
+        <div className="content-github-link">
+          <div>
+            大家好，Electron 版实时互动课堂的开源 App
+            已发布，大家感兴趣可以体验下。
+          </div>
+          <div>
+            开源库地址：
+            <GithubLink />
+          </div>
+          <div>
+            实时互动课堂官网链接： <OfficialWebsiteLink />
+          </div>
+        </div>
         {messageList &&
           messageList.map((message: Record<string, any>) => {
             return (
