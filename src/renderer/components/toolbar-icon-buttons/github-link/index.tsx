@@ -10,6 +10,7 @@ function GithubController() {
     (window as any).electron.openExternal(
       'https://github.com/TencentCloud/trtc-education-electron'
     );
+    (window as any).appMonitor?.reportEvent('GotoGithub');
   };
 
   return (

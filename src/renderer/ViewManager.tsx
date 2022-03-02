@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import './utils/monitor';
 import logger, { LogLevelType } from './utils/logger';
 import { EUserEventNames } from '../constants';
 import { Notification } from './components/toast';

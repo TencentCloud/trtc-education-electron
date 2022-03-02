@@ -14,6 +14,7 @@ function ComRecordController(props: PropsType) {
   const onIconClick = () => {
     logger.log('[ComRecordController] clicked');
     Toast.error('暂未实现，敬请期待', 5000);
+    (window as any).appMonitor?.reportEvent('StartRecord');
   };
 
   return (

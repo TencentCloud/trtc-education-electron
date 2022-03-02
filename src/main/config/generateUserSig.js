@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/extensions
 const LibGenerateTestUserSig = require('./lib-generate-test-usersig.min.js');
-// const LibGenerateTestUserSig = window.LibGenerateTestUserSig;
 /*
  * Module:   GenerateTestUserSig
  *
@@ -66,8 +64,10 @@ module.exports = function genTestUserSig(userID) {
   const generator = new LibGenerateTestUserSig(SDKAPPID, SECRETKEY, EXPIRETIME);
   const userSig = generator.genTestUserSig(userID);
 
-  if (window.aegis && window.aegis.infoAll) {
-    window.aegis.infoAll(`SDKAppId: ${SDKAPPID} - userId: ${userID}`);
+  if (window.appMonitor) {
+    window.appMonitor.setSdkAppID(SDKAPPID);
+    window.appMonitor.setUid(`${SDKAPPID}-${userID}`);
+    window.appMonitor.infoAll(`SDKAppId: ${SDKAPPID} - userId: ${userID} - generate User Sig`);
   }
 
   return {

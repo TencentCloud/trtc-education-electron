@@ -14,6 +14,7 @@ function ComRoasterController(props: ComRoasterControllerPropsType) {
   const onIconClick = () => {
     logger.log('[ComRoasterController] clicked');
     Toast.error('暂未实现，敬请期待', 5000);
+    (window as any).appMonitor?.reportEvent('OpenRoaster');
   };
 
   return (
