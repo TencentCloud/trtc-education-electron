@@ -25,7 +25,7 @@ function ClassTitle(props: Record<string, any>) {
         <span>老师：{teacherID} &nbsp;|&nbsp;</span>
         <span>
           课堂号：{roomID}
-          <CopyNumber number={roomID} userID={userID} />
+          <CopyNumber number={roomID} chatNumber={chatNumber} />
         </span>
         <span>
           | &nbsp;已上课&nbsp;
@@ -35,7 +35,7 @@ function ClassTitle(props: Record<string, any>) {
       <div className="class-chat-group">
         <span>
           QQ&nbsp;交流群： {chatNumber}
-          <CopyNumber number={chatNumber} userID={userID} />
+          <CopyNumber number={chatNumber} chatNumber={chatNumber} />
         </span>
         <span>
           <GithubLink />

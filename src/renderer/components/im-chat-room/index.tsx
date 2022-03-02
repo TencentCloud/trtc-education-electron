@@ -22,6 +22,7 @@ function BottomIm(props: Record<string, any>) {
     }
     sendChatMessage(inputMsg);
     setInputMsg('');
+    (window as any).appMonitor?.reportEvent('SendChatMessage');
   }
   const handleKeyDown = (event: any) => {
     if (event.key === 'Enter') {

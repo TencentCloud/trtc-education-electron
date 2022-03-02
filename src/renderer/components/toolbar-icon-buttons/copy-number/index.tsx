@@ -6,11 +6,11 @@ import logger from '../../../utils/logger';
 
 interface PropsType {
   number: string;
-  userID: string;
+  chatNumber: string;
 }
 
 function CopyNumberController(props: PropsType) {
-  const { number, userID } = props;
+  const { number, chatNumber } = props;
   const renderIcon = () => <FileCopyIcon style={{ fontSize: 15 }} />;
   const onIconClick = () => {
     logger.log('[Com CopyNumberController] clicked');
@@ -27,21 +27,17 @@ function CopyNumberController(props: PropsType) {
     // 复制
     document.execCommand('copy', true);
     Toast.info(
-      number === '695855795' ? 'QQ群号已拷贝到粘贴板' : '课堂号已拷贝到粘贴板'
+      number === chatNumber ? 'QQ群号已拷贝到粘贴板' : '课堂号已拷贝到粘贴板'
     );
-    if (
-      number !== '695855795' &&
-      (window as any).aegis &&
-      (window as any).aegis.infoAll
-    ) {
-      (window as any).aegis.infoAll(`复制QQ群号 userId: ${userID}`);
+    if (number === chatNumber) {
+      (window as any).appMonitor?.reportEvent('CopyQQ');
     }
     textarea.remove();
   };
 
   return (
     <ComBaseToolIconButton
-      name="github"
+      name="copyInfo"
       renderIcon={renderIcon}
       onClickIcon={onIconClick}
     />

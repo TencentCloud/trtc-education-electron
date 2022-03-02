@@ -25,15 +25,20 @@ function useTopToolbarEvent() {
         switch (key) {
           case 'isCameraStarted':
             newUser.isVideoStreamAvailable = options[key];
+            (window as any).appMonitor?.reportEvent('ToggleCameraState');
             break;
           case 'isMicMuted':
             tuiRoomCore.muteLocalMicrophone(options[key]);
+            (window as any).appMonitor?.reportEvent('ToggleMicState');
             break;
           case 'isAllStudentMuted':
             try {
               await tuiRoomCore.muteAllUsersMicrophone(options[key]);
               dispatch(updateAllStudentMuteState(options[key]));
               dispatch(updateIsAllMicrophoneMuted(options[key]));
+              (window as any).appMonitor?.reportEvent(
+                options[key] ? ' MuteAll' : 'UnmuteAll'
+              );
             } catch (error) {
               logger.error(
                 `${logPrefix}onChangeLocalUserState muteAllUsersMicrophone error`,
@@ -45,8 +50,10 @@ function useTopToolbarEvent() {
             try {
               if (options[key]) {
                 await tuiRoomCore.startCallingRoll();
+                (window as any).appMonitor?.reportEvent('StartCallRoll');
               } else {
                 await tuiRoomCore.stopCallingRoll();
+                (window as any).appMonitor?.reportEvent('StopCallRoll');
               }
               dispatch(updateRollState(options[key]));
             } catch (error) {
