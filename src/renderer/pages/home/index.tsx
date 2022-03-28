@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -33,6 +33,12 @@ function Home() {
   );
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (!roomID) {
+      dispatch(updateRoomID(Math.floor(Math.random() * 10000000).toString()));
+    }
+  }, [dispatch, roomID]);
+
   function handleRoomIDChange(event: React.ChangeEvent<HTMLInputElement>) {
     const newRoomID = +event.target.value;
     if (isNaN(newRoomID)) {
@@ -42,7 +48,9 @@ function Home() {
   }
 
   function handleUserIDChange(event: React.ChangeEvent<HTMLInputElement>) {
-    dispatch(updateUserID(event.target.value as string));
+    const newUserID = event.target.value as string;
+    dispatch(updateUserID(newUserID));
+    localStorage.setItem('userID', newUserID);
   }
 
   function handleClassTypeChange(event: React.ChangeEvent<HTMLSelectElement>) {

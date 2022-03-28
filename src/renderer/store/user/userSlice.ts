@@ -6,7 +6,7 @@ const prelog = '[CurrentUserStore]';
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    roomID: Math.floor(Math.random() * 10000000).toString(),
+    roomID: '',
     userID: '',
     role: 'teacher',
     isCameraStarted: true,

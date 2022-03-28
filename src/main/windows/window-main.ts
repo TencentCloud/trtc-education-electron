@@ -684,7 +684,7 @@ export async function createMainWindow(initData: any) {
     width: LOGIN_WIDTH,
     height: LOGIN_HEIGHT,
   };
-  const mainWindowUrl = 'index.html?view=login';
+  const mainWindowUrl = 'index.html?view=home';
   const newWindow = new MainWindow(mainWindowConfig, mainWindowUrl, initData);
   await newWindow.init();
   return newWindow;

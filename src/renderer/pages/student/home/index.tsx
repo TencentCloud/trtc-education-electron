@@ -150,6 +150,7 @@ function StudentHome() {
   // 举手
   const sendHandUpMessage = async () => {
     try {
+      (window as any).appMonitor?.reportEvent('HandUp', 'Init');
       const response = await tuiRoomCore.sendSpeechApplication();
       logger.log(`${logPrefix}sendHandUpMessage result:`, response);
       switch (response.code) {
@@ -174,8 +175,13 @@ function StudentHome() {
           );
           break;
       }
+      (window as any).appMonitor?.reportEvent(
+        'HandUp',
+        `Success#${response.code}`
+      );
     } catch (error) {
       logger.error(`${logPrefix} [sendHandUpMessage] hands-up error`, error);
+      (window as any).appMonitor?.reportEvent('HandUp', 'Failed');
     }
   };
 
@@ -277,14 +283,17 @@ function StudentHome() {
           const tuiResponse = await tuiRoomCore.enterRoom(roomID);
           dispatch(updateStartTime(tuiResponse.data.roomConfig.startTime));
           dispatch(updateOwnerID(tuiResponse.data.ownerID));
-          logger.log(`${logPrefix}.enterClassRoom:`, tuiResponse);
+          logger.log(`${logPrefix}enterClassRoom:`, tuiResponse);
           setTeacherID(tuiResponse.data.ownerID);
 
-          // 开启设别
+          // 开启设备
           tuiRoomCore.startMicrophone();
+
+          (window as any).appMonitor?.reportEvent('EnterClassRoom', 'Success');
         }
       } catch (error) {
         Toast.error('进入课堂失败');
+        (window as any).appMonitor?.reportEvent('EnterClassRoom', 'Failed');
       }
     }
     if (userID && roomID && role) {

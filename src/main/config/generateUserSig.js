@@ -55,6 +55,8 @@ module.exports = function genTestUserSig(userID) {
   const BIZID = 0;
   const LIVE_DOMAIN = '';
 
+  window.appMonitor?.setSdkAppID(SDKAPPID);
+
   // A reminder to guide developer to configure sdkAppId/secretKey
   if (SDKAPPID === '' || SECRETKEY === '') {
     alert(
@@ -64,11 +66,8 @@ module.exports = function genTestUserSig(userID) {
   const generator = new LibGenerateTestUserSig(SDKAPPID, SECRETKEY, EXPIRETIME);
   const userSig = generator.genTestUserSig(userID);
 
-  if (window.appMonitor) {
-    window.appMonitor.setSdkAppID(SDKAPPID);
-    window.appMonitor.setUid(`${SDKAPPID}-${userID}`);
-    window.appMonitor.infoAll(`SDKAppId: ${SDKAPPID} - userId: ${userID} - generate User Sig`);
-  }
+  window.appMonitor?.setUid(`${SDKAPPID}-${userID}`);
+  window.appMonitor?.infoAll(`SDKAppId: ${SDKAPPID} - userId: ${userID} - generate User Sig`);
 
   return {
     sdkAppId: SDKAPPID,

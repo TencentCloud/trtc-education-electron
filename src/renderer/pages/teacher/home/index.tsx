@@ -75,7 +75,9 @@ function HomePage() {
   // 创建课堂
   useEffect(() => {
     async function createClassRoom() {
-      logger.log(`${logPrefix}.createClassRoom enter`);
+      logger.debug(
+        `${logPrefix}createClassRoom enter userID: ${userID} role: ${role} roomID: ${roomID}`
+      );
       try {
         const { userSig, sdkAppId } = await (
           window as any
@@ -85,7 +87,7 @@ function HomePage() {
           const tuiResponse = await tuiRoomCore.createRoom(roomID);
           dispatch(updateStartTime(tuiResponse.data.roomConfig.startTime));
           dispatch(updateOwnerID(tuiResponse.data.ownerID));
-          logger.log(`${logPrefix}.enterClassRoom:`, tuiResponse);
+          logger.log(`${logPrefix}createClassRoom:`, tuiResponse);
 
           // 开启设备
           tuiRoomCore.startMicrophone();
@@ -102,10 +104,11 @@ function HomePage() {
             }
           );
         }
-        (window as any).appMonitor?.reportEvent('CreateClassRoom');
+        (window as any).appMonitor?.reportEvent('CreateClassRoom', 'Success');
       } catch (error) {
-        logger.error(`${logPrefix}enterClassRoom error:`, error);
+        logger.error(`${logPrefix}createClassRoom error:`, error);
         Toast.error('创建课堂失败');
+        (window as any).appMonitor?.reportEvent('CreateClassRoom', 'Failed');
       }
     }
     if (userID && roomID && role) {
@@ -126,7 +129,7 @@ function HomePage() {
         eventSource: EEventSource.ClassRoomWindow,
       }
     );
-    (window as any).appMonitor?.reportEvent('ChangeMicOrSpeaker');
+    (window as any).appMonitor?.reportEvent('OpenMicSpeakerPopup');
   };
 
   // 更新本地麦克风状态
@@ -143,7 +146,6 @@ function HomePage() {
         isMicMuted: mute,
       }
     );
-    (window as any).appMonitor?.reportEvent('ToggleMicState');
   };
 
   // 更新本地摄像头状态
@@ -159,7 +161,6 @@ function HomePage() {
         isCameraStarted: started,
       }
     );
-    (window as any).appMonitor?.reportEvent('ToggleCameraState');
   };
 
   const onOpenCameraSelectPopup = (anchorBounds: DOMRect) => {
@@ -174,7 +175,7 @@ function HomePage() {
         eventSource: EEventSource.ClassRoomWindow,
       }
     );
-    (window as any).appMonitor?.reportEvent('ChangeCamera');
+    (window as any).appMonitor?.reportEvent('OpenCameraPopup');
   };
 
   // 更新白板分享的尺寸大小，由白板组件内部触发
@@ -191,7 +192,6 @@ function HomePage() {
     setVideoListWindowMode(EWindowSizeMode.Maximize);
 
     startShareWhiteBoard();
-    (window as any).appMonitor?.reportEvent('ShareWhiteboard');
   }, [startShareWhiteBoard]);
 
   // 进入屏幕分享模式
@@ -222,9 +222,6 @@ function HomePage() {
       tuiRoomCore.startScreenCapture(null, screenShareEncParam);
     }
     (window as any).appMonitor?.reportEvent('ShareScreen');
-
-    // // 通知主进程调整窗口模式
-    // (window as any).electron.ipcRenderer.send('enterScreenShareMode');
   };
 
   // 注册进入屏幕分享事件处理函数
@@ -274,7 +271,6 @@ function HomePage() {
         mode: EWindowSizeMode.Minimize,
       }
     );
-    (window as any).appMonitor?.reportEvent('CollapseVideoList');
   };
 
   // 屏幕分享模式下，展开视频列表窗口
@@ -286,7 +282,6 @@ function HomePage() {
         mode: EWindowSizeMode.Maximize,
       }
     );
-    (window as any).appMonitor?.reportEvent('ExpandVideoList');
   };
 
   // 全员禁麦
@@ -305,7 +300,8 @@ function HomePage() {
       logger.error(`${logPrefix}.muteAllStudent error`, error);
     }
     (window as any).appMonitor?.reportEvent(
-      !isAllStudentMuted ? ' MuteAll' : 'UnmuteAll'
+      'MuteAll',
+      !isAllStudentMuted ? 'mute' : 'unmute'
     );
   }, [isAllStudentMuted, dispatch]);
 
@@ -322,12 +318,12 @@ function HomePage() {
         await tuiRoomCore.startCallingRoll();
         dispatch(updateRollState(true));
         Toast.info('开始点名！', 1000);
-        (window as any).appMonitor?.reportEvent('StartCallRoll');
+        (window as any).appMonitor?.reportEvent('CallRoll', 'start');
       } else {
         await tuiRoomCore.stopCallingRoll();
         dispatch(updateRollState(false));
         Toast.info('结束点名！', 1000);
-        (window as any).appMonitor?.reportEvent('StopCallRoll');
+        (window as any).appMonitor?.reportEvent('CallRoll', 'stop');
       }
       (window as any).electron.ipcRenderer.send(
         EUserEventNames.ON_CHANGE_LOCAL_USER_STATE,
@@ -458,11 +454,11 @@ function HomePage() {
           setSpeechInvitationList(userList);
           tuiRoomCore.cancelSpeechInvitation(user.userID);
         }
-        (window as any).appMonitor?.reportEvent('UnmuteStudent');
+        (window as any).appMonitor?.reportEvent('MuteStudent', 'unmute');
       } else {
         // 老师强制关闭学生麦克风
         tuiRoomCore.muteUserMicrophone(user.userID, true);
-        (window as any).appMonitor?.reportEvent('MuteStudent');
+        (window as any).appMonitor?.reportEvent('MuteStudent', 'mute');
       }
     }
   };

@@ -55,6 +55,19 @@ export default function SimpleTabs(props: Record<string, any>) {
   // eslint-disable-next-line @typescript-eslint/ban-types
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    switch (newValue) {
+      case 0:
+        (window as any).appMonitor?.reportEvent('OpenVideoList');
+        break;
+      case 1:
+        (window as any).appMonitor?.reportEvent('OpenIMChat');
+        break;
+      case 2:
+        (window as any).appMonitor?.reportEvent('OpenMemberList');
+        break;
+      default:
+        break;
+    }
   };
 
   return (
