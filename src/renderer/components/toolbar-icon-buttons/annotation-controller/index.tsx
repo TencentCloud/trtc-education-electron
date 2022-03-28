@@ -9,7 +9,6 @@ function ComAnnotationController() {
   const onIconClick = () => {
     logger.log('[ComAnnotationController] clicked');
     Toast.error('暂未实现，敬请期待', 5000);
-    (window as any).appMonitor?.reportEvent('StartInterAnnotation');
   };
 
   return (
