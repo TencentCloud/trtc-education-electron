@@ -15,6 +15,7 @@ import { EUserEventNames } from '../../../../constants';
 import Toolbar from './section/toolbar';
 import TitleBar from '../../../components/class-room-title-bar';
 import AsidePanel from '../../../components/class-room-layout/aside-panel';
+import DeviceDetector from '../../../components/class-device-detector';
 import AsideCameraVideoList from './section/aside-camera-video-list';
 import logger from '../../../utils/logger';
 import {
@@ -51,6 +52,8 @@ function HomePage() {
   const [speechInvitationList, setSpeechInvitationList] = useState<
     Array<string>
   >([]);
+  const [isDeviceTestFinished, setIsDeviceTestFinished] =
+    useState<boolean>(false);
 
   useDevice();
   useClassMember();
@@ -111,10 +114,10 @@ function HomePage() {
         (window as any).appMonitor?.reportEvent('CreateClassRoom', 'Failed');
       }
     }
-    if (userID && roomID && role) {
+    if (userID && roomID && role && isDeviceTestFinished) {
       createClassRoom();
     }
-  }, [dispatch, userID, roomID, role]);
+  }, [dispatch, userID, roomID, role, isDeviceTestFinished]);
 
   // 打开麦克风、扬声器选择Popup
   const onOpenMicSpeakerSelectPopup = (anchorBounds: DOMRect) => {
@@ -299,10 +302,7 @@ function HomePage() {
     } catch (error) {
       logger.error(`${logPrefix}.muteAllStudent error`, error);
     }
-    (window as any).appMonitor?.reportEvent(
-      'MuteAll',
-      !isAllStudentMuted ? 'mute' : 'unmute'
-    );
+    (window as any).appMonitor?.reportEvent('MuteAll');
   }, [isAllStudentMuted, dispatch]);
 
   // 发起点名
@@ -318,13 +318,12 @@ function HomePage() {
         await tuiRoomCore.startCallingRoll();
         dispatch(updateRollState(true));
         Toast.info('开始点名！', 1000);
-        (window as any).appMonitor?.reportEvent('CallRoll', 'start');
       } else {
         await tuiRoomCore.stopCallingRoll();
         dispatch(updateRollState(false));
         Toast.info('结束点名！', 1000);
-        (window as any).appMonitor?.reportEvent('CallRoll', 'stop');
       }
+      (window as any).appMonitor?.reportEvent('CallRoll');
       (window as any).electron.ipcRenderer.send(
         EUserEventNames.ON_CHANGE_LOCAL_USER_STATE,
         {
@@ -454,13 +453,19 @@ function HomePage() {
           setSpeechInvitationList(userList);
           tuiRoomCore.cancelSpeechInvitation(user.userID);
         }
-        (window as any).appMonitor?.reportEvent('MuteStudent', 'unmute');
       } else {
         // 老师强制关闭学生麦克风
         tuiRoomCore.muteUserMicrophone(user.userID, true);
-        (window as any).appMonitor?.reportEvent('MuteStudent', 'mute');
       }
+      (window as any).appMonitor?.reportEvent('MuteStudent');
     }
+  };
+
+  const onCloseDeviceTest = () => {
+    setIsDeviceTestFinished(true);
+  };
+  const onFinishDeviceTest = (finishDeviceTest: boolean) => {
+    setIsDeviceTestFinished(finishDeviceTest);
   };
 
   const classMemberList = Object.values(userMap) as Record<string, any>[];
@@ -549,6 +554,15 @@ function HomePage() {
           </div>
         )}
       </div>
+      <DeviceDetector
+        visible
+        onClose={onCloseDeviceTest}
+        audioUrl=""
+        lang="zh-CN"
+        hasNetworkDetect={false}
+        networkDetectInfo={{}}
+        onFinishDeviceTest={onFinishDeviceTest}
+      />
     </div>
   );
 }

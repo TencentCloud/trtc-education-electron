@@ -15,6 +15,7 @@ import Toolbar from './section/toolbar';
 import TitleBar from '../../../components/class-room-title-bar';
 import AsidePanel from '../../../components/class-room-layout/aside-panel';
 import ConfirmDialog from '../../../components/confirm-dialog';
+import DeviceDetector from '../../../components/class-device-detector';
 import {
   updateStartTime,
   updateIsAllMicrophoneMuted,
@@ -31,6 +32,7 @@ import './index.scss';
 function StudentHome() {
   const logPrefix = '[StudentHome]';
   const refShareScreen = useRef<HTMLDivElement>(null);
+  const lang = 'zh-CN';
 
   const dispatch = useDispatch();
   const currentUser = useSelector((state: any) => state.user);
@@ -46,6 +48,8 @@ function StudentHome() {
     cancelText: '拒绝',
     children: '老师邀请您上台发言',
   });
+  const [isDeviceTestFinished, setIsDeviceTestFinished] =
+    useState<boolean>(false);
 
   const { changeCurrentCamera, changeCurrentMic, changeCurrentSpeaker } =
     useDevice();
@@ -296,10 +300,10 @@ function StudentHome() {
         (window as any).appMonitor?.reportEvent('EnterClassRoom', 'Failed');
       }
     }
-    if (userID && roomID && role) {
+    if (userID && roomID && role && isDeviceTestFinished) {
       enterClassRoom();
     }
-  }, [userID, roomID, role, dispatch]);
+  }, [userID, roomID, role, dispatch, isDeviceTestFinished]);
 
   const toggleMicMuteState = useCallback(
     (user: Record<string, any>) => {
@@ -341,6 +345,13 @@ function StudentHome() {
     await tuiRoomCore.replySpeechInvitation(false);
     Toast.info(`拒绝上台`, 1000);
     setDialogToggle(false);
+  };
+
+  const onCloseDeviceTest = () => {
+    setIsDeviceTestFinished(true);
+  };
+  const onFinishDeviceTest = (finishDeviceTest: boolean) => {
+    setIsDeviceTestFinished(finishDeviceTest);
   };
 
   const classUserList = Object.values(userMap) as Record<string, any>[];
@@ -408,6 +419,15 @@ function StudentHome() {
           {dialogConfig.children}
         </ConfirmDialog>
       </div>
+      <DeviceDetector
+        visible
+        onClose={onCloseDeviceTest}
+        audioUrl=""
+        lang={lang}
+        hasNetworkDetect={false}
+        networkDetectInfo={{}}
+        onFinishDeviceTest={onFinishDeviceTest}
+      />
     </div>
   );
 }

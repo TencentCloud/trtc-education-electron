@@ -189,6 +189,27 @@ export default interface ITUIRoomCore {
   stopMicrophone: () => void;
 
   /**
+   * 开始进行麦克风测试
+   */
+  startMicrophoneTest: () => void;
+
+  /**
+   * 停止麦克风测试
+   */
+  stopMicrophoneTest: () => void;
+
+  /**
+   * 开始进行扬声器测试
+   * @param testAudioFilePath 音频文件的绝对路径，路径字符串使用 UTF-8 编码格式，支持文件格式：WAV、MP3
+   */
+  startSpeakerTest: (testAudioFilePath: string) => void;
+
+  /**
+   * 停止扬声器测试
+   */
+  stopSpeakerTest: () => void;
+
+  /**
    * 开启系统声音的采集
    *
    * 调用该接口后会开启系统声音采集。
@@ -368,6 +389,13 @@ export default interface ITUIRoomCore {
    * @returns {TRTCDeviceInfo | null}
    */
   getCurrentSpeaker: () => TRTCDeviceInfo | null;
+
+  /**
+   *  获取系统当前扬声器设备音量
+   *
+   * @returns {number}
+   */
+  getCurrentSpeakerVolume: () => number;
 
   /**
    * 切换当前扬声器
