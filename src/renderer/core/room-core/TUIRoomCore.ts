@@ -8,6 +8,8 @@ import {
   TRTCVideoQosPreference,
   TRTCBeautyStyle,
   TRTCVideoStreamType,
+  TRTCDeviceType,
+  TRTCDeviceState,
 } from 'trtc-electron-sdk/liteav/trtc_define';
 // @ts-ignore
 import TIM from 'tim-js-sdk';
@@ -104,6 +106,8 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
     this.onUserSubStreamAvailable = this.onUserSubStreamAvailable.bind(this);
     this.onUserAudioAvailable = this.onUserAudioAvailable.bind(this);
     this.onFirstVideoAvailable = this.onFirstVideoAvailable.bind(this);
+    this.onTestMicVolume = this.onTestMicVolume.bind(this);
+    this.onTestSpeaker = this.onTestSpeaker.bind(this);
     this.bindTRTCEvent();
 
     this.onReceiveChatMessage = this.onReceiveChatMessage.bind(this);
@@ -456,6 +460,24 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
   }
 
   /**
+   * 打开本地摄像头测试
+   *
+   * @param {HTMLElement} view 显示本地摄像头的 div 元素
+   */
+  startCameraDeviceTest(view: HTMLElement) {
+    logger.debug(`${TUIRoomCore.logPrefix}startCameraDeviceTest`);
+    this.trtcService.startCameraDeviceTest(view);
+  }
+
+  /**
+   * 关闭本地摄像头测试
+   */
+  stopCameraDeviceTest() {
+    logger.debug(`${TUIRoomCore.logPrefix}stopCameraDeviceTest`);
+    this.trtcService.stopCameraDeviceTest();
+  }
+
+  /**
    * 开启本地麦克风
    *
    * @param {TRTCAudioQuality} quality 音频采集质量
@@ -489,6 +511,39 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
       ETUIRoomEvents.onUserStateChange,
       simpleClone(this.state.currentUser)
     );
+  }
+
+  /**
+   * 开始进行麦克风测试
+   *
+   */
+  startMicrophoneTest() {
+    logger.debug(`${TUIRoomCore.logPrefix}startMicrophoneTest`);
+    this.trtcService.startMicrophoneTest(200);
+  }
+
+  /**
+   * 停止麦克风测试
+   *
+   */
+  stopMicrophoneTest() {
+    logger.debug(`${TUIRoomCore.logPrefix}stopMicDeviceTest`);
+    this.trtcService.stopMicrophoneTest();
+  }
+
+  /**
+   * 开始进行扬声器测试
+   *@param testAudioFilePath 音频文件的绝对路径，路径字符串使用 UTF-8 编码格式，支持文件格式：WAV、MP3
+   */
+  startSpeakerTest(testAudioFilePath: string) {
+    this.trtcService.startSpeakerTest(testAudioFilePath);
+  }
+
+  /**
+   *  停止扬声器测试
+   */
+  stopSpeakerTest() {
+    this.trtcService.stopSpeakerTest();
   }
 
   /**
@@ -780,6 +835,15 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
   }
 
   /**
+   * 获取系统当前扬声器设备音量
+   *
+   * @returns {number}
+   */
+  getCurrentSpeakerVolume(): any {
+    return this.trtcService.getCurrentSpeakerVolume();
+  }
+
+  /**
    * 切换当前扬声器
    *
    * @param {string} deviceID 设备ID
@@ -864,6 +928,9 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
     this.trtcService.on('onUserSubStreamAvailable', this.onUserSubStreamAvailable); // eslint-disable-line
     this.trtcService.on('onUserAudioAvailable', this.onUserAudioAvailable);
     this.trtcService.on('onFirstVideoAvailable', this.onFirstVideoAvailable);
+    this.trtcService.on('onTestMicVolume', this.onTestMicVolume);
+    this.trtcService.on('onTestSpeakerVolume', this.onTestSpeaker);
+    this.trtcService.on('onDeviceChange', this.onDeviceChange);
   }
 
   unbindTRTCEvent() {
@@ -873,6 +940,9 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
     this.trtcService.off('onUserSubStreamAvailable', this.onUserSubStreamAvailable); // eslint-disable-line
     this.trtcService.off('onUserAudioAvailable', this.onUserAudioAvailable);
     this.trtcService.off('onFirstVideoAvailable', this.onFirstVideoAvailable);
+    this.trtcService.off('onTestMicVolume', this.onTestMicVolume);
+    this.trtcService.off('onTestSpeakerVolume', this.onTestSpeaker);
+    this.trtcService.off('onDeviceChange', this.onDeviceChange);
   }
 
   onRemoteUserEnterRoom(userID: string) {
@@ -979,6 +1049,26 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
           : ETUIStreamType.SCREEN,
       width,
       height,
+    });
+  }
+
+  onTestMicVolume(volume: number) {
+    this.emitter.emit(ETUIRoomEvents.onTestMicVolume, volume);
+  }
+
+  onTestSpeaker(volume: number) {
+    this.emitter.emit(ETUIRoomEvents.onTestSpeakerVolume, volume);
+  }
+
+  onDeviceChange(
+    deviceId: string,
+    type: TRTCDeviceType,
+    state: TRTCDeviceState
+  ) {
+    this.emitter.emit(ETUIRoomEvents.onDeviceChange, {
+      deviceId,
+      type,
+      state,
     });
   }
 
