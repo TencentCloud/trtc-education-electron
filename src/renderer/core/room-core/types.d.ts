@@ -107,41 +107,46 @@ export interface TTUIRoomInfo extends TTUIRoomConfig {
 /**
  * 事件名称枚举常量
  */
+
 export enum ETUIRoomEvents {
   onError = 'onError',
-  onRoomDestroyed = 'onRoomDestroyed', // supported
+  onRoomDestroyed = 'onRoomDestroyed',
   onRoomExited = 'onRoomExited',
   onRoomMasterChanged = 'onRoomMasterChanged',
-  onUserEnterRoom = 'onUserEnterRoom', // supported
-  onUserLeaveRoom = 'onUserLeaveRoom', // supported
-  onUserVideoAvailable = 'onUserVideoAvailable', // supported
-  onUserAudioAvailable = 'onUserAudioAvailable', // supported
-  onFirstVideoFrame = 'onFirstVideoFrame', // supported
+  onUserEnterRoom = 'onUserEnterRoom',
+  onUserLeaveRoom = 'onUserLeaveRoom',
+  onUserVideoAvailable = 'onUserVideoAvailable',
+  onUserAudioAvailable = 'onUserAudioAvailable',
+  onFirstVideoFrame = 'onFirstVideoFrame',
   onUserVoiceVolume = 'onUserVoiceVolume',
-  onUserStateChange = 'onUserStateChange', // supported new added
+  onUserStateChange = 'onUserStateChange',
   onDeviceChange = 'onDeviceChange',
   onNetworkQuality = 'onNetworkQuality',
   onStatistics = 'onStatistics',
-  onReceiveChatMessage = 'onReceiveChatMessage', // supported
-  onReceiveCustomMessage = 'onReceiveCustomMessage', // supported
+  onReceiveChatMessage = 'onReceiveChatMessage',
+  onReceiveCustomMessage = 'onReceiveCustomMessage',
   onUserEnterSpeechState = 'onUserEnterSpeechState',
   onUserExitSpeechState = 'onUserExitSpeechState',
-  onReceiveSpeechInvitation = 'onReceiveSpeechInvitation', // supported
-  onReceiveInvitationCancelled = 'onReceiveInvitationCancelled', // supported
-  onReceiveInvitationTimeout = 'onReceiveInvitationTimeout', // supported
+  onReceiveSpeechInvitation = 'onReceiveSpeechInvitation',
+  onReceiveInvitationCancelled = 'onReceiveInvitationCancelled',
+  onReceiveInvitationTimeout = 'onReceiveInvitationTimeout',
+
   // onReceiveReplyToSpeechInvitation = 'onReceiveReplyToSpeechInvitation', // not needed
-  onReceiveSpeechApplication = 'onReceiveSpeechApplication', // supported
-  onSpeechApplicationCancelled = 'onSpeechApplicationCancelled', // supported
-  onSpeechApplicationTimeout = 'onSpeechApplicationTimeout', // supported
+  onReceiveSpeechApplication = 'onReceiveSpeechApplication',
+  onSpeechApplicationCancelled = 'onSpeechApplicationCancelled',
+  onSpeechApplicationTimeout = 'onSpeechApplicationTimeout',
+
   // onReceiveReplyToSpeechApplication = 'onReceiveReplyToSpeechApplication', // not needed
   onSpeechApplicationForbidden = 'onSpeechApplicationForbidden',
   onOrderedToExitSpeechState = 'onOrderedToExitSpeechState',
-  onCallingRollStarted = 'onCallingRollStarted',  // supported
-  onCallingRollStopped = 'onCallingRollStopped',  // supported
-  onUserReplyCallingRoll = 'onUserReplyCallingRoll',  // supported
+  onCallingRollStarted = 'onCallingRollStarted',
+  onCallingRollStopped = 'onCallingRollStopped',
+  onUserReplyCallingRoll = 'onUserReplyCallingRoll',
   onChatRoomMuted = 'onChatRoomMuted',
-  onMicrophoneMuted = 'onMicrophoneMuted', // supported
+  onMicrophoneMuted = 'onMicrophoneMuted',
   onCameraMuted = 'onCameraMuted',
+  onTestMicVolume = "onTestMicVolume",
+  onTestSpeakerVolume= "onTestSpeakerVolume"
 }
 
 /**

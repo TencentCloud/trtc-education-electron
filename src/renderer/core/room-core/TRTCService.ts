@@ -230,12 +230,36 @@ class TRTCService {
     this.rtcCloud?.stopLocalPreview();
   }
 
+  startCameraDeviceTest(view: HTMLElement) {
+    this.rtcCloud?.startCameraDeviceTest(view);
+  }
+
+  stopCameraDeviceTest() {
+    this.rtcCloud?.stopCameraDeviceTest();
+  }
+
   startMicrophone(quality?: TRTCAudioQuality) {
     this.rtcCloud?.startLocalAudio(quality);
   }
 
   stopMicrophone() {
     this.rtcCloud?.stopLocalAudio();
+  }
+
+  startMicrophoneTest(interval: number) {
+    this.rtcCloud?.startMicDeviceTest(interval);
+  }
+
+  stopMicrophoneTest() {
+    this.rtcCloud?.stopMicDeviceTest();
+  }
+
+  startSpeakerTest(testAudioFilePath: string) {
+    this.rtcCloud?.startSpeakerDeviceTest(testAudioFilePath);
+  }
+
+  stopSpeakerTest() {
+    this.rtcCloud?.stopSpeakerDeviceTest();
   }
 
   startSystemAudioLoopback() {
@@ -306,6 +330,10 @@ class TRTCService {
 
   setVideoQosPreference(preference: TRTCVideoQosPreference) {
     this.rtcCloud?.setNetworkQosParam(preference);
+  }
+
+  getCurrentSpeakerVolume() {
+    this.rtcCloud?.getCurrentSpeakerVolume();
   }
 
   /**

@@ -34,10 +34,7 @@ function useTopToolbarEvent() {
               await tuiRoomCore.muteAllUsersMicrophone(options[key]);
               dispatch(updateAllStudentMuteState(options[key]));
               dispatch(updateIsAllMicrophoneMuted(options[key]));
-              (window as any).appMonitor?.reportEvent(
-                'MuteAll',
-                options[key] ? 'mute' : 'unmute'
-              );
+              (window as any).appMonitor?.reportEvent('MuteAll');
             } catch (error) {
               logger.error(
                 `${logPrefix}onChangeLocalUserState muteAllUsersMicrophone error`,

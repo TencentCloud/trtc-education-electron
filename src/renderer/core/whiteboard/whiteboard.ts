@@ -228,7 +228,7 @@ class Whiteboard {
       this.draw();
       this.drawShadow();
     }
-    (window as any).appMonitor?.reportEvent('Whiteboard.Draw');
+    (window as any).appMonitor?.reportEvent('WhiteboardDraw');
   }
 
   private onFinishTextEdit(text: string) {
