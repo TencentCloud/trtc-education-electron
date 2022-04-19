@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
@@ -22,7 +23,6 @@ function Home() {
   const logPrefix = '[Home]';
   const appVersion = `${buildPackageConfig.version}.${packageConfig.build.buildVersion}`;
   logger.log(`${logPrefix} appVersion:`, appVersion);
-  const chatNumber = useSelector((state: any) => state.user.chatNumber);
   const userID = useSelector((state: any) => state.user.userID);
   const roomID = useSelector((state: any) => state.user.roomID);
   const classType = useSelector((state: any) => state.user.classType);
@@ -71,7 +71,7 @@ function Home() {
       return result;
     } catch (error) {
       logger.error(`${logPrefix}isRoomExisted error:`, error);
-      Toast.error('房间号检测异常');
+      Toast.error(a18n('房间号检测异常'));
       throw error;
     }
   }
@@ -83,11 +83,11 @@ function Home() {
     try {
       const roomInfo = await isRoomExisted();
       if (roomInfo && roomInfo.ownerID !== userID) {
-        Toast.error('课堂号已存在，请更换课堂号。');
+        Toast.error(a18n('课堂号已存在，请更换课堂号。'));
         return;
       }
     } catch (error) {
-      logger.error(`${logPrefix}createClass 课堂号检查失败。`, error);
+      logger.error(a18n`${logPrefix}createClass 课堂号检查失败。`, error);
       return;
     }
     const response = await (window as any).electron.ipcRenderer.invoke(
@@ -108,11 +108,11 @@ function Home() {
     try {
       const roomInfo = await isRoomExisted();
       if (!roomInfo) {
-        Toast.error('老师尚未创建课堂。');
+        Toast.error(a18n('老师尚未创建课堂。'));
         return;
       }
     } catch (error) {
-      logger.error(`${logPrefix}createClass 课堂号检查失败。`, error);
+      logger.error(a18n`${logPrefix}createClass 课堂号检查失败。`, error);
       return;
     }
     const response = await (window as any).electron.ipcRenderer.invoke(
@@ -130,7 +130,7 @@ function Home() {
     <div className="trtc-edu-home">
       <form className="trtc-edu-home-form" noValidate autoComplete="off">
         <div className="form-item">
-          <div className="form-item-label">您的名称</div>
+          <div className="form-item-label">{a18n('您的名称')}</div>
           <TextField
             variant="outlined"
             value={userID}
@@ -138,7 +138,7 @@ function Home() {
           />
         </div>
         <div className="form-item">
-          <div className="form-item-label">课堂ID</div>
+          <div className="form-item-label">{a18n('课堂ID')}</div>
           <TextField
             variant="outlined"
             value={roomID}
@@ -147,10 +147,10 @@ function Home() {
           />
         </div>
         <div className="form-item">
-          <div className="form-item-label">课堂类型</div>
+          <div className="form-item-label">{a18n('课堂类型')}</div>
           <FormControl variant="outlined">
             <Select value={classType} onChange={handleClassTypeChange as any}>
-              <MenuItem value="education">互动课堂</MenuItem>
+              <MenuItem value="education">{a18n('互动课堂')}</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -160,20 +160,20 @@ function Home() {
             className="create-class-btn"
             onClick={createClass}
           >
-            创建课堂
+            {a18n('创建课堂')}
           </Button>
           <Button
             variant="contained"
             className="enter-class-btn"
             onClick={enterClass}
           >
-            进入课堂
+            {a18n('进入课堂')}
           </Button>
         </div>
       </form>
       <div className="home-empty" />
       <div className="home-qq-number">
-        如有任何问题可以联系我们，QQ&nbsp;群号：{chatNumber}
+        {a18n('如有任何问题可以联系我们，QQ 群号：695855795')}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import VideocamOffIcon from '@material-ui/icons/VideocamOff';
@@ -81,7 +82,7 @@ function CameraController(props: CameraControllerProps) {
 
   return popupType === EPopupType.InnerWindow ? (
     <BaseToolIconButton
-      name="摄像头"
+      name={a18n('摄像头')}
       muted={!isStarted}
       mode={mode}
       renderIcon={renderIcon}
@@ -91,7 +92,7 @@ function CameraController(props: CameraControllerProps) {
     />
   ) : (
     <BaseToolIconButton
-      name="摄像头"
+      name={a18n('摄像头')}
       muted={!isStarted}
       mode={mode}
       renderIcon={renderIcon}

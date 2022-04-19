@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React, { useState, useEffect } from 'react';
 import { TRTCDeviceInfo } from 'trtc-electron-sdk/liteav/trtc_define';
 import logger from '../../../../../utils/logger';
@@ -90,7 +91,7 @@ function StudentClassRoomToolBar(props: TStudentClassRoomToolBarProps) {
       // 打开弹窗
       setIsClosureDialogVisible(true);
       setIsCancelExit(true);
-      setTipMessage('确定离开教室吗？');
+      setTipMessage(a18n('确定离开教室吗？'));
       // 处理窗口关闭场景
       if (event && event.returnValue !== undefined) {
         event.preventDefault();
@@ -111,7 +112,7 @@ function StudentClassRoomToolBar(props: TStudentClassRoomToolBarProps) {
 
   const onRoomDestroyed = () => {
     logger.log(`${logPrefix}onRoomDestroyed`);
-    setTipMessage('老师已解散课堂!');
+    setTipMessage(a18n('老师已解散课堂!'));
     setIsClassRoomDisMissed(true);
     setIsCancelExit(false);
     setIsClosureDialogVisible(true);
@@ -129,7 +130,11 @@ function StudentClassRoomToolBar(props: TStudentClassRoomToolBarProps) {
   return (
     <div className="trtc-edu-teacher-class-room-tool-bar">
       <Footer>
-        <HandUpController mode="big" name="举手" onClick={handsUpHandler} />
+        <HandUpController
+          mode="big"
+          name={a18n('举手')}
+          onClick={handsUpHandler}
+        />
         <CameraController
           mode="big"
           isStarted={isCameraStarted}

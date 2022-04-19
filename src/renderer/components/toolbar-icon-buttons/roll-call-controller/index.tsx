@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import ComBaseToolIconButton from '../base';
@@ -13,7 +14,7 @@ function ComRollCallController(props: PropsType) {
 
   return (
     <ComBaseToolIconButton
-      name={!isRolled ? '点名' : '结束点名'}
+      name={!isRolled ? a18n('点名') : a18n('结束点名')}
       mode={mode}
       renderIcon={renderIcon}
       onClickIcon={onCallAllStudent}

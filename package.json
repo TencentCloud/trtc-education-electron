@@ -1,8 +1,8 @@
 {
   "name": "trtc-education-electron",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "productName": "trtcElectronEducationExternal",
-  "description": "TRTC Electron Education based on Tencent RTC, Tencent IM and Electron for teachers and students interacting and coordinating remotely",
+  "description": "TRTC Education Electron based on Tencent RTC, Tencent IM and Electron for teachers and students interacting and coordinating remotely",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
     "build:main": "cross-env NODE_ENV=production webpack --config ./.erb/configs/webpack.config.main.prod.babel.js",

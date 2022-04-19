@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import Toast from '../../toast';
@@ -27,7 +28,9 @@ function CopyNumberController(props: PropsType) {
     // 复制
     document.execCommand('copy', true);
     Toast.info(
-      number === chatNumber ? 'QQ群号已拷贝到粘贴板' : '课堂号已拷贝到粘贴板'
+      number === chatNumber
+        ? a18n('QQ群号已拷贝到粘贴板')
+        : a18n('课堂号已拷贝到粘贴板')
     );
     if (number === chatNumber) {
       (window as any).appMonitor?.reportEvent('CopyQQ');

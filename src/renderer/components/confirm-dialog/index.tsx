@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -33,9 +34,11 @@ function ConfirmDialog(props: ConfirmDialogProps) {
       </DialogContent>
       <DialogActions>
         <Button color="primary" onClick={handleConfirm}>
-          {confirmText || '确认'}
+          {confirmText || a18n('确认')}
         </Button>
-        {onCancel && <Button onClick={onCancel}>{cancelText || '取消'}</Button>}
+        {onCancel && (
+          <Button onClick={onCancel}>{cancelText || a18n('取消')}</Button>
+        )}
       </DialogActions>
     </Dialog>
   );
@@ -44,8 +47,8 @@ function ConfirmDialog(props: ConfirmDialogProps) {
 ConfirmDialog.defaultProps = {
   onCancel: undefined,
   children: null,
-  confirmText: '确认',
-  cancelText: '取消',
+  confirmText: a18n('确认'),
+  cancelText: a18n('取消'),
 };
 
 export default ConfirmDialog;

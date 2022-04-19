@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -72,7 +73,7 @@ function ComHandUpController(props: PropsType) {
             })
           ) : (
             <ListItem className="hands-up-list-item" key="empty">
-              无数据
+              {a18n('无数据')}
             </ListItem>
           )}
         </List>
@@ -121,7 +122,7 @@ function ComHandUpController(props: PropsType) {
   } else {
     content = (
       <ComBaseToolIconButton
-        name="举手"
+        name={a18n('举手')}
         mode={mode}
         renderIcon={renderIcon}
         onClickIcon={onIconClick}

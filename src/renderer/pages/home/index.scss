@@ -1,6 +1,7 @@
 @import '../../assets/style/variables.scss';
 
 .trtc-edu-home {
+  position: relative;
   display: flex;
   flex-direction: row;
   height: 100%;
@@ -11,10 +12,16 @@
     height: 100%;
     flex-grow: 1;
   }
+  .home-language {
+    position: absolute;
+    top: 26rem;
+    left: 3rem;
+  }
   .home-qq-number {
-    margin-top: 30rem;
+    position: absolute;
+    top: 32rem;
+    right: 2rem;
     font-weight: bold;
-    margin-right: 2rem;
   }
 
   .trtc-edu-home-form {

@@ -1,6 +1,5 @@
 import a18n from 'a18n';
 import React, { useState, useEffect } from 'react';
-import logger from 'renderer/utils/logger';
 import Button from './base-components/index';
 import DeviceConnect from './deviceConnect';
 import CameraDetector from './cameraDetector';
@@ -10,16 +9,15 @@ import NetworkDetector from './networkDetector';
 import DetectorReport from './detectorReport';
 import { CameraIcon, MicIcon, SpeakerIcon, NetworkIcon } from './utils';
 import './index.scss';
-import en from '../../locales/en';
-import zh from '../../locales/zh';
+import en from '../../locales/device-en';
+import zh from '../../locales/device-zh';
 
-a18n.addLocaleResource('en', en);
+a18n.addLocaleResource('en-US', en);
 a18n.addLocaleResource('zh-CN', zh);
 
 interface DeviceDetectorProps {
   visible: any;
   onClose: any;
-  lang: string;
   audioUrl: string;
   hasNetworkDetect: boolean;
   networkDetectInfo: any;
@@ -29,7 +27,6 @@ function DeviceDetector(props: DeviceDetectorProps) {
   const {
     visible,
     onClose,
-    lang = 'zh-CN',
     audioUrl = '',
     hasNetworkDetect = true,
     networkDetectInfo,
@@ -44,10 +41,6 @@ function DeviceDetector(props: DeviceDetectorProps) {
   useEffect(() => {
     setOpen(visible);
   }, [visible]);
-
-  useEffect(() => {
-    a18n.setLocale(lang);
-  }, [lang]);
 
   const stepNameList = ['camera', 'microphone', 'speaker', 'network'];
   if (!hasNetworkDetect) {

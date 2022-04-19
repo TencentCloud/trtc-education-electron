@@ -73,10 +73,9 @@ function SpeakerDetector(props: SpeakerDetectorProps) {
             {a18n('请调高设备音量，点击播放下面的音频试试～')}
           </div>
           <div>
-            <span>播放音频</span>
+            <span>{a18n('播放音频')}</span>
             <Switch
               checked={speakOn}
-              name="启用扬声器"
               onChange={toggleSpeakerTest}
               color="primary"
             />

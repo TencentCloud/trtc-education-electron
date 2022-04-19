@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import GithubLink from '../toolbar-icon-buttons/github-link';
 import CopyNumber from '../toolbar-icon-buttons/copy-number';
@@ -18,23 +19,30 @@ function ClassTitle(props: Record<string, any>) {
   return (
     <div className="trtc-edu-class-room-title">
       <div className="app-version">
-        <span className="version">应用版本：{appVersion}</span>
-        <span className="version">SDK版本：{tuiRoomCore.getSDKVersion()}</span>
+        <span className="version">
+          {a18n('应用版本：')}
+          {appVersion}
+        </span>
+        <span className="version">
+          {a18n('SDK版本：')}
+          {tuiRoomCore.getSDKVersion()}
+        </span>
       </div>
       <div className="class-start-time">
-        <span>老师：{teacherID} &nbsp;|&nbsp;</span>
+        <span>{a18n.x`老师：${teacherID}`}｜</span>
         <span>
-          课堂号：{roomID}
+          {a18n('课堂号：')}
+          {roomID}
           <CopyNumber number={roomID} chatNumber={chatNumber} />
         </span>
         <span>
-          | &nbsp;已上课&nbsp;
+          ｜{a18n('已上课')}
           <Time classStartTime={classStartTime} />
         </span>
       </div>
       <div className="class-chat-group">
         <span>
-          QQ&nbsp;交流群： {chatNumber}
+          {a18n('QQ 交流群：')} {chatNumber}
           <CopyNumber number={chatNumber} chatNumber={chatNumber} />
         </span>
         <span>

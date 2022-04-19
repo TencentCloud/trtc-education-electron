@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import UpdateSharpIcon from '@material-ui/icons/UpdateSharp';
@@ -118,7 +119,7 @@ function ClassTool(props: ClassToolProps) {
             color="secondary"
             onClick={onStopSharing}
           >
-            结束分享
+            {a18n('结束分享')}
           </Button>
         </div>
       </div>

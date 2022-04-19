@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import './index.scss';
 
@@ -6,9 +7,9 @@ function ClassMemberList(props: Record<string, any>) {
   const classMemberList = classMembers.map((user: Record<string, any>) => {
     let showName = '';
     if (user.role === 'Owner') {
-      showName = `${user.userID}(老师)`;
+      showName = a18n`${user.userID}(老师)`;
     } else if (user.userID === currentUserID) {
-      showName = `${user.userID}(我)`;
+      showName = a18n`${user.userID}(我)`;
     } else {
       showName = user.userID;
     }
@@ -33,7 +34,9 @@ function ClassMemberList(props: Record<string, any>) {
           </svg>
           <span className="name">{showName}</span>
         </aside>
-        {user.isCallingRoll && <span className="user-roll">已签到</span>}
+        {user.isCallingRoll && (
+          <span className="user-roll">{a18n('已签到')}</span>
+        )}
       </div>
     );
   });

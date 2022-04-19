@@ -146,7 +146,7 @@ export enum ETUIRoomEvents {
   onMicrophoneMuted = 'onMicrophoneMuted',
   onCameraMuted = 'onCameraMuted',
   onTestMicVolume = "onTestMicVolume",
-  onTestSpeakerVolume= "onTestSpeakerVolume"
+  onTestSpeakerVolume= "onTestSpeakerVolume",
 }
 
 /**

@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -110,7 +111,7 @@ function HomePage() {
         (window as any).appMonitor?.reportEvent('CreateClassRoom', 'Success');
       } catch (error) {
         logger.error(`${logPrefix}createClassRoom error:`, error);
-        Toast.error('创建课堂失败');
+        Toast.error(a18n('创建课堂失败'));
         (window as any).appMonitor?.reportEvent('CreateClassRoom', 'Failed');
       }
     }
@@ -414,20 +415,26 @@ function HomePage() {
               );
               switch (tuiResponse?.code) {
                 case ETUISignalStatus.ACCEPTED:
-                  Toast.info(`${tuiResponse?.data?.inviterID}接受上台`, 1000);
+                  Toast.info(
+                    a18n`${tuiResponse?.data?.inviterID}接受上台`,
+                    1000
+                  );
                   break;
                 case ETUISignalStatus.REJECTED:
-                  Toast.info(`${tuiResponse?.data?.inviterID}拒绝上台`, 1000);
+                  Toast.info(
+                    a18n`${tuiResponse?.data?.inviterID}拒绝上台`,
+                    1000
+                  );
                   break;
                 case ETUISignalStatus.CANCELLED:
                   Toast.info(
-                    `您已取消邀请${tuiResponse?.data?.inviterID}上台`,
+                    a18n`您已取消邀请${tuiResponse?.data?.inviterID}上台`,
                     1000
                   );
                   break;
                 case ETUISignalStatus.TIMEOUT:
                   Toast.info(
-                    `${tuiResponse?.data?.inviterID}上台超时，未接受`,
+                    a18n`${tuiResponse?.data?.inviterID}上台超时，未接受`,
                     1000
                   );
                   break;
@@ -558,7 +565,6 @@ function HomePage() {
         visible
         onClose={onCloseDeviceTest}
         audioUrl=""
-        lang="zh-CN"
         hasNetworkDetect={false}
         networkDetectInfo={{}}
         onFinishDeviceTest={onFinishDeviceTest}

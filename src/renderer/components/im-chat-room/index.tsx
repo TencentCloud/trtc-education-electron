@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React, { useRef, useEffect, useState } from 'react';
 import GithubLink from '../toolbar-icon-buttons/github-link';
 import OfficialWebsiteLink from '../toolbar-icon-buttons/offical-website-link';
@@ -41,15 +42,16 @@ function BottomIm(props: Record<string, any>) {
       <div className="content-top-chat">
         <div className="content-github-link">
           <div>
-            大家好，Electron 版实时互动课堂的开源 App
-            已发布，大家感兴趣可以体验下。
+            {a18n(
+              '大家好，Electron 版实时互动课堂的开源 App\n            已发布，大家感兴趣可以体验下。'
+            )}
           </div>
           <div>
-            开源库地址：
+            {a18n('开源库地址：')}
             <GithubLink />
           </div>
           <div>
-            实时互动课堂官网链接： <OfficialWebsiteLink />
+            {a18n('实时互动课堂官网链接：')} <OfficialWebsiteLink />
           </div>
         </div>
         {messageList &&
@@ -81,7 +83,7 @@ function BottomIm(props: Record<string, any>) {
           onChange={updateInputMsg}
           onKeyDown={handleKeyDown}
           className="content-bottom-input"
-          placeholder="请输入内容"
+          placeholder={a18n('请输入内容')}
         />
       </div>
     </div>
