@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useClassMember from '../../../hooks/use-class-member';
@@ -32,7 +33,6 @@ import './index.scss';
 function StudentHome() {
   const logPrefix = '[StudentHome]';
   const refShareScreen = useRef<HTMLDivElement>(null);
-  const lang = 'zh-CN';
 
   const dispatch = useDispatch();
   const currentUser = useSelector((state: any) => state.user);
@@ -44,9 +44,9 @@ function StudentHome() {
   const [callingRollStatus, setCallingRollStatus] = useState<boolean>(false);
   const [dialogToggle, setDialogToggle] = useState<boolean>(false);
   const [dialogConfig] = useState<Record<string, any>>({
-    confirmText: '接受',
-    cancelText: '拒绝',
-    children: '老师邀请您上台发言',
+    confirmText: a18n('接受'),
+    cancelText: a18n('拒绝'),
+    children: a18n('老师邀请您上台发言'),
   });
   const [isDeviceTestFinished, setIsDeviceTestFinished] =
     useState<boolean>(false);
@@ -68,7 +68,7 @@ function StudentHome() {
   const updateMicMuteState = useCallback(
     (mute: boolean) => {
       if (currentUser.isMutedByTeacher && !currentUser.isHandUpConfirmed) {
-        Toast.info('您已被老师禁言，需要发言请先举手。', 10000);
+        Toast.info(a18n('您已被老师禁言，需要发言请先举手。'), 10000);
         return;
       }
       tuiRoomCore.muteLocalMicrophone(mute);
@@ -160,17 +160,17 @@ function StudentHome() {
       switch (response.code) {
         case ETUISignalStatus.ACCEPTED:
           // 举手发言被允许
-          Toast.info('老师已同意您的举手申请，现在可以发言了', 3000);
+          Toast.info(a18n('老师已同意您的举手申请，现在可以发言了'), 3000);
           onConfirmHandUpHandler();
           break;
         case ETUISignalStatus.REJECTED:
-          Toast.info('举手申请被拒绝');
+          Toast.info(a18n('举手申请被拒绝'));
           break;
         case ETUISignalStatus.CANCELLED:
-          Toast.info('举手申请已取消');
+          Toast.info(a18n('举手申请已取消'));
           break;
         case ETUISignalStatus.TIMEOUT:
-          Toast.info('举手申请超时');
+          Toast.info(a18n('举手申请超时'));
           break;
         default:
           logger.error(
@@ -207,7 +207,7 @@ function StudentHome() {
   const onReceiveInvitationTimeoutHandler = (event: { eventCode: string }) => {
     logger.warn(`${logPrefix}onReceiveInvitationTimeoutHandler event:`, event);
     setDialogToggle(false);
-    Toast.info(`上台邀请已超时`, 1000);
+    Toast.info(a18n`上台邀请已超时`, 1000);
   };
 
   // 注册事件监听
@@ -296,7 +296,7 @@ function StudentHome() {
           (window as any).appMonitor?.reportEvent('EnterClassRoom', 'Success');
         }
       } catch (error) {
-        Toast.error('进入课堂失败');
+        Toast.error(a18n('进入课堂失败'));
         (window as any).appMonitor?.reportEvent('EnterClassRoom', 'Failed');
       }
     }
@@ -326,16 +326,16 @@ function StudentHome() {
     try {
       await tuiRoomCore.replyCallingRoll();
       setCallingRollStatus(false);
-      Toast.info('签到成功！', 1000);
+      Toast.info(a18n('签到成功！'), 1000);
     } catch (error) {
-      Toast.error('签到失败！', 1000);
+      Toast.error(a18n('签到失败！'), 1000);
     }
   };
 
   // 接受上台
   const handleDialogConfirm = async () => {
     await tuiRoomCore.replySpeechInvitation(true);
-    Toast.info(`接受上台`, 1000);
+    Toast.info(a18n`接受上台`, 1000);
     onConfirmHandUpHandler();
     setDialogToggle(false);
   };
@@ -343,7 +343,7 @@ function StudentHome() {
   // 拒绝上台
   const handleDialogCancel = async () => {
     await tuiRoomCore.replySpeechInvitation(false);
-    Toast.info(`拒绝上台`, 1000);
+    Toast.info(a18n`拒绝上台`, 1000);
     setDialogToggle(false);
   };
 
@@ -423,7 +423,6 @@ function StudentHome() {
         visible
         onClose={onCloseDeviceTest}
         audioUrl=""
-        lang={lang}
         hasNetworkDetect={false}
         networkDetectInfo={{}}
         onFinishDeviceTest={onFinishDeviceTest}

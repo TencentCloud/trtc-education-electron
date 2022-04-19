@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import { EUserEventNames } from '../../constants';
 import { resolveHtmlPath } from '../util';
 import BaseWindow from './window-base';
@@ -73,7 +74,7 @@ class PopupWindow extends BaseWindow {
       const response = await this.browserWindow?.loadURL(resolveHtmlPath(url));
       return response;
     }
-    throw new Error('URL 地址不能为空');
+    throw new Error(a18n('URL 地址不能为空'));
   }
 
   private onBlur() {

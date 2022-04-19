@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React, { useState, useEffect } from 'react';
 import { TRTCDeviceInfo } from 'trtc-electron-sdk/liteav/trtc_define';
 import logger from '../../../../../utils/logger';
@@ -122,14 +123,14 @@ function TeacherClassRoomToolBar(props: TTeacherClassRoomToolBarProps) {
   const toggleSettingModal = () => {
     setIsSettingModalOpen(!isSettingModalOpen);
   };
-  const tipMessage = '确定下课吗？';
+  const tipMessage = a18n('确定下课吗？');
 
   return (
     <div className="trtc-edu-teacher-class-room-tool-bar">
       <Footer>
         <HandUpController
           mode="big"
-          name="举手列表"
+          name={a18n('举手列表')}
           handsUpList={handsUpList}
           onClick={handsUpHandler}
           onPopClose={onHandsUpPopClose}

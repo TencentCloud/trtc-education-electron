@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React, { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -131,13 +132,13 @@ function MicrophoneSpeakerSelector(props: Record<string, any>) {
   const renderPopupContent = () => {
     return (
       <div className="trtc-edu-device-select-popover">
-        <div className="trtc-edu-device-list-title">麦克风</div>
+        <div className="trtc-edu-device-list-title">{a18n('麦克风')}</div>
         {MicrophoneList(
           microphoneList,
           currentMicrophoneID,
           onChangeMicrophone
         )}
-        <div className="trtc-edu-device-list-title">扬声器</div>
+        <div className="trtc-edu-device-list-title">{a18n('扬声器')}</div>
         {SpeakerList(speakerList, currentSpeakerID, onChangeSpeaker)}
       </div>
     );

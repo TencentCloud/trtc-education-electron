@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import MicIcon from '@material-ui/icons/Mic';
 import MicOffIcon from '@material-ui/icons/MicOff';
@@ -115,13 +116,13 @@ function MicrophoneSpeakerController(props: MicrophoneSpeakerControllerProps) {
   const renderPopoverSelect = () => {
     return (
       <div className="device-select-popover">
-        <div className="device-list-title">麦克风</div>
+        <div className="device-list-title">{a18n('麦克风')}</div>
         {MicrophoneList(
           microphoneList,
           currentMicrophoneID,
           onChangeMicrophone
         )}
-        <div className="device-list-title">扬声器</div>
+        <div className="device-list-title">{a18n('扬声器')}</div>
         {SpeakerList(speakerList, currentSpeakerID, onChangeSpeaker)}
       </div>
     );
@@ -133,7 +134,7 @@ function MicrophoneSpeakerController(props: MicrophoneSpeakerControllerProps) {
 
   return popupType === EPopupType.InnerWindow ? (
     <BaseToolIconButton
-      name="麦克风"
+      name={a18n('麦克风')}
       muted={isMute}
       mode={mode}
       renderIcon={renderIcon}
@@ -143,7 +144,7 @@ function MicrophoneSpeakerController(props: MicrophoneSpeakerControllerProps) {
     />
   ) : (
     <BaseToolIconButton
-      name="麦克风"
+      name={a18n('麦克风')}
       muted={isMute}
       mode={mode}
       renderIcon={renderIcon}

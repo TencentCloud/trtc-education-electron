@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React, { useState, useEffect } from 'react';
 import CheckIcon from '@material-ui/icons/Check';
 import List from '@material-ui/core/List';
@@ -84,7 +85,7 @@ function CameraSelector(props: Record<string, any>) {
   const renderPopupContent = () => {
     return (
       <div className="trtc-edu-device-select-popover">
-        <div className="trtc-edu-device-list-title">摄像头</div>
+        <div className="trtc-edu-device-list-title">{a18n('摄像头')}</div>
         {CameraList(cameraList, currentCameraID, onChangeCamera)}
       </div>
     );

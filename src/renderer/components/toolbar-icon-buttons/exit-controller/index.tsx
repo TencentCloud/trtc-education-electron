@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import logger from '../../../utils/logger';
@@ -19,7 +20,7 @@ function ComExitController(props: PropsType) {
 
   return (
     <ComBaseToolIconButton
-      name={role === 'teacher' ? '下课' : '离开教室'}
+      name={role === 'teacher' ? a18n('下课') : a18n('离开教室')}
       mode={mode}
       renderIcon={renderIcon}
       onClickIcon={onIconClick}

@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -78,9 +79,9 @@ export default function SimpleTabs(props: Record<string, any>) {
           onChange={handleChange}
           aria-label="simple tabs example"
         >
-          <Tab label="视频列表" />
-          <Tab label="聊天互动" />
-          <Tab label="成员列表" />
+          <Tab label={a18n('视频列表')} />
+          <Tab label={a18n('聊天互动')} />
+          <Tab label={a18n('成员列表')} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

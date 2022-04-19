@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import PeopleAltSharpIcon from '@material-ui/icons/PeopleAltSharp';
 import Toast from '../../toast';
@@ -13,13 +14,13 @@ function ComRoasterController(props: ComRoasterControllerPropsType) {
   const renderIcon = () => <PeopleAltSharpIcon />;
   const onIconClick = () => {
     logger.log('[ComRoasterController] clicked');
-    Toast.error('暂未实现，敬请期待', 5000);
+    Toast.error(a18n('暂未实现，敬请期待'), 5000);
     (window as any).appMonitor?.reportEvent('OpenRoaster');
   };
 
   return (
     <ComBaseToolIconButton
-      name="花名册"
+      name={a18n('花名册')}
       mode={mode}
       renderIcon={renderIcon}
       onClickIcon={onIconClick}

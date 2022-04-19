@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -87,7 +88,7 @@ function ShareScreenSelection(props: ShareScreenSelectionProps) {
   return (
     <div className="share-screen-selection">
       <div>
-        <h3>屏幕</h3>
+        <h3>{a18n('屏幕')}</h3>
         <ul className="preview-list screen-preview-list">
           {screenTypeList.map((screen) => {
             return (
@@ -111,7 +112,7 @@ function ShareScreenSelection(props: ShareScreenSelectionProps) {
         </ul>
       </div>
       <div>
-        <h3>窗口</h3>
+        <h3>{a18n('窗口')}</h3>
         <ul className="preview-list window-preview-list">
           {windowTypeList.map((win) => {
             return (
@@ -179,7 +180,7 @@ function OptionalButton() {
             color="primary"
           />
         }
-        label="同时共享电脑声音"
+        label={a18n('同时共享电脑声音')}
       />
       <FormControlLabel
         control={
@@ -190,7 +191,7 @@ function OptionalButton() {
             color="primary"
           />
         }
-        label="视频流畅度优先"
+        label={a18n('视频流畅度优先')}
       />
     </FormGroup>
   );
@@ -217,7 +218,7 @@ function ShareScreenSelectionDialog(props: ShareScreenSelectionDialogProps) {
     if (screenInfo) {
       onConfirm(screenInfo);
     } else {
-      Toast.info('请选择需要分享的屏幕或窗口', 10000);
+      Toast.info(a18n('请选择需要分享的屏幕或窗口'), 10000);
     }
   };
 
@@ -231,7 +232,7 @@ function ShareScreenSelectionDialog(props: ShareScreenSelectionDialogProps) {
       aria-labelledby="screen-sharing-selection-dialog-title"
     >
       <DialogTitle id="screen-sharing-selection-dialog-title">
-        选择要分享的屏幕或应用窗口
+        {a18n('选择要分享的屏幕或应用窗口')}
       </DialogTitle>
       <DialogContent dividers>
         <ShareScreenSelection onSelect={onSelect} appWindowIDs={appWindowIDs} />
@@ -243,9 +244,9 @@ function ShareScreenSelectionDialog(props: ShareScreenSelectionDialogProps) {
           </div>
           <div className="screen-sharing-selection-dialog-confirm">
             <Button color="primary" onClick={handleConfirm}>
-              确认
+              {a18n('确认')}
             </Button>
-            <Button onClick={onCancel}>取消</Button>
+            <Button onClick={onCancel}>{a18n('取消')}</Button>
           </div>
         </div>
       </DialogActions>

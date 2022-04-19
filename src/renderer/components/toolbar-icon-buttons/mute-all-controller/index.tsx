@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import MuteAllIcon from '../../ui-widget/icon/svg-icon/mute-all';
 import UnmuteAllIcon from '../../ui-widget/icon/svg-icon/unmute-all';
@@ -22,7 +23,7 @@ function ComMuteAllController(props: PropsType) {
 
   return (
     <ComBaseToolIconButton
-      name="全员禁麦"
+      name={a18n('全员禁麦')}
       muted={isMute}
       mode={mode}
       renderIcon={renderIcon}

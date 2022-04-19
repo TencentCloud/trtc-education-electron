@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import logger from '../../utils/logger';
 import {
   WhiteboardToolType,
@@ -189,7 +190,7 @@ class Whiteboard {
     throw new Error(
       JSON.stringify({
         errorCode: 1002,
-        errorMessage: 'canvas画布不存在',
+        errorMessage: a18n('canvas画布不存在'),
       })
     );
   }
@@ -201,7 +202,7 @@ class Whiteboard {
       } else {
         const error = JSON.stringify({
           errorCode: 1001,
-          errorMessage: 'canvas坐标计算错误',
+          errorMessage: a18n('canvas坐标计算错误'),
         });
         throw Error(error);
       }
@@ -306,7 +307,7 @@ class Whiteboard {
       } else {
         const error = JSON.stringify({
           errorCode: 1001,
-          errorMessage: 'canvas坐标计算错误',
+          errorMessage: a18n('canvas坐标计算错误'),
         });
         throw Error(error);
       }
@@ -327,7 +328,7 @@ class Whiteboard {
       } else {
         const error = JSON.stringify({
           errorCode: 1001,
-          errorMessage: 'canvas坐标计算错误',
+          errorMessage: a18n('canvas坐标计算错误'),
         });
         throw Error(error);
       }
@@ -399,7 +400,7 @@ class Whiteboard {
           if (this.graphicShadowMap.has(color)) {
             const targetGraphic = this.graphicShadowMap.get(color);
             logger.log(
-              `${Whiteboard.LOG_PREFIX}.onClickCanvasHandler 找到有效图形：`,
+              a18n`${Whiteboard.LOG_PREFIX}.onClickCanvasHandler 找到有效图形：`,
               targetGraphic,
               this.graphicQueue
             );
@@ -412,7 +413,7 @@ class Whiteboard {
           } else {
             logger.error(
               `${Whiteboard.LOG_PREFIX}.onClickCanvasHandler`,
-              '点击位置不存在有效图形，color:',
+              a18n('点击位置不存在有效图形，color:'),
               color,
               this.graphicShadowMap,
               this.graphicQueue

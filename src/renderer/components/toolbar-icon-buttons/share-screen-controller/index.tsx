@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import AirplaySharpIcon from '@material-ui/icons/AirplaySharp';
 import ComBaseToolIconButton from '../base';
@@ -18,7 +19,7 @@ function ComShareScreenController(props: ComShareScreenControllerProps) {
 
   return (
     <ComBaseToolIconButton
-      name="共享屏幕"
+      name={a18n('共享屏幕')}
       mode={mode}
       renderIcon={renderIcon}
       onClickIcon={onIconClick}

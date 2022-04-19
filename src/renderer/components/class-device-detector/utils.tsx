@@ -24,13 +24,13 @@ export function isOnline() {
 }
 
 export const NETWORK_QUALITY = {
-  0: '未知',
-  1: '极佳',
-  2: '较好',
-  3: '一般',
-  4: '差',
-  5: '极差',
-  6: '断开',
+  0: a18n('未知'),
+  1: a18n('极佳'),
+  2: a18n('较好'),
+  3: a18n('一般'),
+  4: a18n('差'),
+  5: a18n('极差'),
+  6: a18n('断开'),
 };
 
 export const handleGetUserMediaError = (error: any) => {

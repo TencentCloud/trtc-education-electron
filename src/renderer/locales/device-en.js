@@ -1,4 +1,5 @@
 export default {
+  播放音频: 'play audio',
   摄像头选择: 'Camera selection',
   '是否可以清楚的看到自己？': 'Can you see yourself clearly?',
   看不到: 'No',

@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import logger from '../../utils/logger';
 import './index.scss';
@@ -11,7 +12,7 @@ function StudentSignIn(props: any) {
   return (
     <div className="sign-in" onClick={signOn}>
       {' '}
-      签到
+      {a18n('签到')}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import a18n from 'a18n';
 import React from 'react';
 import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
 import Toast from '../../toast';
@@ -14,7 +15,7 @@ function ComSettingController(props: PropsType) {
   const renderIcon = () => <SettingsSharpIcon />;
   const onIconClick = () => {
     logger.log('[ComSettingController] clicked');
-    Toast.error('暂未实现，敬请期待', 5000);
+    Toast.error(a18n('暂未实现，敬请期待'), 5000);
     (window as any).appMonitor?.reportEvent('OpenSettingWindow');
     if (typeof onClick === 'function') {
       onClick();
@@ -23,7 +24,7 @@ function ComSettingController(props: PropsType) {
 
   return (
     <ComBaseToolIconButton
-      name="设置"
+      name={a18n('设置')}
       mode={mode}
       renderIcon={renderIcon}
       onClickIcon={onIconClick}
