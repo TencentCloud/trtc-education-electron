@@ -318,11 +318,11 @@ function HomePage() {
       if (!isRolled) {
         await tuiRoomCore.startCallingRoll();
         dispatch(updateRollState(true));
-        Toast.info('开始点名！', 1000);
+        Toast.info(a18n('开始点名！'), 1000);
       } else {
         await tuiRoomCore.stopCallingRoll();
         dispatch(updateRollState(false));
-        Toast.info('结束点名！', 1000);
+        Toast.info(a18n('结束点名！'), 1000);
       }
       (window as any).appMonitor?.reportEvent('CallRoll');
       (window as any).electron.ipcRenderer.send(
