@@ -15,6 +15,12 @@ export default interface EventCallback {
   onError: (error: TTUIRoomError) => void;
 
   /**
+   * 被动触发的警告异常
+   * 这里只能处理被动触发的警告异常，主动调用接口发生的异常/错误只能在返回 Promise 的接口回调中处理
+   */
+  onWarning: (error: TTUIRoomError) => void;
+
+  /**
    * /////////////////////////////////////////////////////////////////////////////////
    * //
    * //                                   房间管理相关事件接口

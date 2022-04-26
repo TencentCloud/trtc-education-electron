@@ -6,7 +6,7 @@
   "应用版本：": "app version",
   "SDK版本：": "SDK version",
   "老师：%s": "Teacher: %s",
-  "课堂号：": "Number：",
+  "课堂号：": "Classroom ID: ",
   "已上课": "Class on for ",
   "QQ 交流群：": "QQ group:",
   "确认": "confirm",
@@ -75,7 +75,7 @@
   "课堂号检测异常": "Classroom number detection exception",
   "应用版本老旧，请升级，已自动打开默认浏览器为您下载。": "The application version is outdated, please upgrade, the default browser has been automatically opened for you to download.",
   "%senterClass 课堂号检查失败。": "enterClass Class ID check failed.",
-  "课堂号": "Number",
+  "课堂号": "Classroom ID",
   "请先同意隐私协议！": "Agree to the Privacy Policy first.",
   "请检查手机号是否正确": "Invalid phone number",
   "请检查密码，密码长度不低于6个字符": "The password must contain at least 6 characters.",
@@ -143,5 +143,6 @@
   "老师已解散课堂!": "The teacher has dismissed the class!",
   "确定下课吗？": "Are you sure you want to leave the get out of class?",
   "举手列表": "Hand list",
-  "结束分享": "End sharing"
+  "结束分享": "End sharing",
+  "secutiry.mac.screenCapture.permission.notice": "Due to system permision control from macOS 10.15 and later, please open \"System Preferences --> Security & Privacy --> Screen recording\" and select the checkbox next to \"TRTCElectronEducation\"."
 }

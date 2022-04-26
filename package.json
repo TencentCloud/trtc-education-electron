@@ -1,6 +1,6 @@
 {
   "name": "trtc-education-electron",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "productName": "trtcElectronEducationExternal",
   "description": "TRTC Education Electron based on Tencent RTC, Tencent IM and Electron for teachers and students interacting and coordinating remotely",
   "scripts": {

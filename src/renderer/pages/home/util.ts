@@ -1,4 +1,4 @@
-import { tuiRoomCore, TUIRoomInfo } from 'renderer/core/room-core';
+import { tuiRoomCore, TUIRoomInfo } from '../../core/room-core';
 import logger from '../../utils/logger';
 
 async function login(userID: string) {

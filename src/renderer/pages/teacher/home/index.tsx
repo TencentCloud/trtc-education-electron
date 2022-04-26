@@ -35,6 +35,7 @@ import {
   updateIsAllMicrophoneMuted,
   updateOwnerID,
 } from '../../../store/room-info/roomInfoSlice';
+import useTUIRoomErrorWarning from '../../../hooks/use-tuiroom-error-warning';
 import useDevice from '../../../hooks/use-device';
 import WhiteboardPanel from './section/whiteboard-panel';
 import { EEventSource, EWindowMode, EWindowSizeMode } from '../../../../types';
@@ -56,6 +57,7 @@ function HomePage() {
   const [isDeviceTestFinished, setIsDeviceTestFinished] =
     useState<boolean>(false);
 
+  useTUIRoomErrorWarning();
   useDevice();
   useClassMember();
   const { sendChatMessage } = useMessageList();
@@ -318,11 +320,11 @@ function HomePage() {
       if (!isRolled) {
         await tuiRoomCore.startCallingRoll();
         dispatch(updateRollState(true));
-        Toast.info('开始点名！', 1000);
+        Toast.info(a18n('开始点名！'), 1000);
       } else {
         await tuiRoomCore.stopCallingRoll();
         dispatch(updateRollState(false));
-        Toast.info('结束点名！', 1000);
+        Toast.info(a18n('结束点名！'), 1000);
       }
       (window as any).appMonitor?.reportEvent('CallRoll');
       (window as any).electron.ipcRenderer.send(
