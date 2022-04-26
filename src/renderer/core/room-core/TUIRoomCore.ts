@@ -100,6 +100,9 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
       this.tsignalingService
     );
 
+    this.onTRTCError = this.onTRTCError.bind(this);
+    this.onTRTCWarning = this.onTRTCWarning.bind(this);
+
     this.onRemoteUserEnterRoom = this.onRemoteUserEnterRoom.bind(this);
     this.onRemoteUserLeaveRoom = this.onRemoteUserLeaveRoom.bind(this);
     this.onUserVideoAvailable = this.onUserVideoAvailable.bind(this);
@@ -922,6 +925,8 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
    * /////////////////////////////////////////////////////////////////////////////////
    */
   bindTRTCEvent() {
+    this.trtcService.on('onError', this.onTRTCError);
+    this.trtcService.on('onWarning', this.onTRTCWarning);
     this.trtcService.on('onRemoteUserEnterRoom', this.onRemoteUserEnterRoom);
     this.trtcService.on('onRemoteUserLeaveRoom', this.onRemoteUserLeaveRoom);
     this.trtcService.on('onUserVideoAvailable', this.onUserVideoAvailable);
@@ -934,6 +939,8 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
   }
 
   unbindTRTCEvent() {
+    this.trtcService.off('onError', this.onTRTCError);
+    this.trtcService.off('onWarning', this.onTRTCWarning);
     this.trtcService.off('onRemoteUserEnterRoom', this.onRemoteUserEnterRoom);
     this.trtcService.off('onRemoteUserLeaveRoom', this.onRemoteUserLeaveRoom);
     this.trtcService.off('onUserVideoAvailable', this.onUserVideoAvailable);
@@ -943,6 +950,26 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
     this.trtcService.off('onTestMicVolume', this.onTestMicVolume);
     this.trtcService.off('onTestSpeakerVolume', this.onTestSpeaker);
     this.trtcService.off('onDeviceChange', this.onDeviceChange);
+  }
+
+  onTRTCError(errCode: number, errMsg: string) {
+    logger.error(
+      `${TUIRoomCore.logPrefix}onTRTCError code: ${errCode} message: ${errMsg}`
+    );
+    this.emitter.emit(ETUIRoomEvents.onError, {
+      code: errCode,
+      message: errMsg,
+    });
+  }
+
+  onTRTCWarning(warningCode: number, warningMsg: string) {
+    logger.warn(
+      `${TUIRoomCore.logPrefix}onTRTCWarning code: ${warningCode} message: ${warningMsg}`
+    );
+    this.emitter.emit(ETUIRoomEvents.onWarning, {
+      code: warningCode,
+      message: warningMsg,
+    });
   }
 
   onRemoteUserEnterRoom(userID: string) {

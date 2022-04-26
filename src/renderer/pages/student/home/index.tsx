@@ -5,6 +5,7 @@ import useClassMember from '../../../hooks/use-class-member';
 import useMessageList from '../../../hooks/use-message-list';
 import StudentSignIn from '../../../components/student-sign-in';
 import logger from '../../../utils/logger';
+import useTUIRoomErrorWarning from '../../../hooks/use-tuiroom-error-warning';
 import useDevice from '../../../hooks/use-device';
 import {
   updateDeviceState,
@@ -51,6 +52,7 @@ function StudentHome() {
   const [isDeviceTestFinished, setIsDeviceTestFinished] =
     useState<boolean>(false);
 
+  useTUIRoomErrorWarning();
   const { changeCurrentCamera, changeCurrentMic, changeCurrentSpeaker } =
     useDevice();
   const cameraList = useSelector((state: any) => state.device.cameraList);

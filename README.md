@@ -1,5 +1,7 @@
 # 实时互动课堂 工程快速跑通
 
+_[English](README.en.md) | 简体中文_
+
 本文档主要介绍如何快速跑通 实时互动课堂 代码工程，更多详细介绍，请参照[腾讯云官网](https://cloud.tencent.com/document/product/647/45465)。
 
 # 目录结构
@@ -142,11 +144,11 @@ yarn package
 
 > 注意：只能使用 Mac 电脑构建 Mac 安装包，使用 Windows 电脑构建 Windows 安装包。
 
-# 第四步：示例体验
+## 第四步：示例体验
 
 > Tips: 为了达到良好的体验效果，最好使用两台电脑，一台用来创建课堂，另一台用来加入课堂。
 
-## 教师端创建课堂
+### 教师端创建课堂
 
 1. 应用程序启动后，在 “您的名称” 处输入 “**teacher**”，“课堂号” 可以使用应用程序自动生成的，也可以自己输入一个，点击 “创建课堂”。
 
@@ -156,7 +158,7 @@ yarn package
 
 <img src="https://web.sdk.qcloud.com/trtc/electron/download/resources/education-v2/teacher-classroom-view.png" width="640"/>
 
-## 学生端加入课堂
+### 学生端加入课堂
 
 1. 应用程序启动后，在在 “您的名称” 处输入 “**student**”，“课堂号” 需要与上述教师端的课堂号保持一致，点击 “加入课堂”。
 

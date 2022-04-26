@@ -457,7 +457,7 @@ class TRTCService {
   }
 
   off(eventName: string, handler: (...args: any) => void) {
-    this.rtcCloud?.on(eventName, handler);
+    this.rtcCloud?.off(eventName, handler);
   }
 
   /**

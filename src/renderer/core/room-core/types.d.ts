@@ -110,6 +110,7 @@ export interface TTUIRoomInfo extends TTUIRoomConfig {
 
 export enum ETUIRoomEvents {
   onError = 'onError',
+  onWarning = 'onWarning',
   onRoomDestroyed = 'onRoomDestroyed',
   onRoomExited = 'onRoomExited',
   onRoomMasterChanged = 'onRoomMasterChanged',
@@ -130,13 +131,9 @@ export enum ETUIRoomEvents {
   onReceiveSpeechInvitation = 'onReceiveSpeechInvitation',
   onReceiveInvitationCancelled = 'onReceiveInvitationCancelled',
   onReceiveInvitationTimeout = 'onReceiveInvitationTimeout',
-
-  // onReceiveReplyToSpeechInvitation = 'onReceiveReplyToSpeechInvitation', // not needed
   onReceiveSpeechApplication = 'onReceiveSpeechApplication',
   onSpeechApplicationCancelled = 'onSpeechApplicationCancelled',
   onSpeechApplicationTimeout = 'onSpeechApplicationTimeout',
-
-  // onReceiveReplyToSpeechApplication = 'onReceiveReplyToSpeechApplication', // not needed
   onSpeechApplicationForbidden = 'onSpeechApplicationForbidden',
   onOrderedToExitSpeechState = 'onOrderedToExitSpeechState',
   onCallingRollStarted = 'onCallingRollStarted',
