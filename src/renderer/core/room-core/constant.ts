@@ -73,10 +73,6 @@ export const TUIRoomErrorMessage = {
   TS_CMD_ERROR: a18n('本次响应操作无对应邀请事件信令'),
 };
 
-export const CommonConstant = {
-  groupIDPrefix: 'Room_',
-};
-
 export const TSignalingConfig = {
   timeout: 60,
 };
