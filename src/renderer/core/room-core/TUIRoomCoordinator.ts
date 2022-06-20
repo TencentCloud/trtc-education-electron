@@ -8,7 +8,6 @@ import TUIRoomError from './base/TUIRoomError';
 import {
   TUIRoomErrorCode,
   TUIRoomErrorMessage,
-  CommonConstant,
   TSignalingConfig,
 } from './constant';
 import ITUIRoomCoordinator from './ITUIRoomCoordinator';
@@ -60,7 +59,7 @@ class TUIRoomCoordinator implements ITUIRoomCoordinator {
   init(options: { roomID: string; tim: any }) {
     const { roomID, tim } = options;
     this.roomID = roomID;
-    this.groupID = `${CommonConstant.groupIDPrefix}${roomID}`;
+    this.groupID = roomID;
     this.tim = tim;
     this.bindTIMEvent();
     this.bindTSignalingEvent();

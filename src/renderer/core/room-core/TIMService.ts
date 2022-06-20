@@ -7,11 +7,7 @@ import Event from '../common/emitter/event';
 import TUIRoomError from './base/TUIRoomError';
 import TUIRoomResponse from './base/TUIRoomResponse';
 import { ETUIRoomEvents } from './types.d';
-import {
-  TUIRoomErrorCode,
-  TUIRoomErrorMessage,
-  CommonConstant,
-} from './constant';
+import { TUIRoomErrorCode, TUIRoomErrorMessage } from './constant';
 import { simpleClone } from './util';
 import TUIRoomConfig from './base/TUIRoomConfig';
 
@@ -111,7 +107,7 @@ class TIMService {
     logger.debug(`${TIMService.logPrefix}.createGroup groupID: ${groupID}`);
     this.preCheckMethodCall();
 
-    this.groupID = `${CommonConstant.groupIDPrefix}${groupID}`;
+    this.groupID = groupID;
     let groupInfo = null;
     let isGroupExist = false;
     let timResponse = null;
@@ -187,7 +183,7 @@ class TIMService {
     logger.debug(`${TIMService.logPrefix}.joinGroup groupID: ${groupID}`);
     this.preCheckMethodCall();
 
-    this.groupID = `${CommonConstant.groupIDPrefix}${groupID}`;
+    this.groupID = groupID;
     try {
       let groupInfo = null;
       const imResponse = await this.tim.joinGroup({
@@ -234,7 +230,7 @@ class TIMService {
     this.preCheckMethodCall();
 
     let groupInfo = null;
-    const realGroupID = `${CommonConstant.groupIDPrefix}${groupID}`;
+    const realGroupID = groupID;
     try {
       const response = await this.tim.searchGroupByID(realGroupID);
       groupInfo = response.data.group;
