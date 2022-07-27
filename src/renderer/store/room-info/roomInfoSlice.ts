@@ -12,7 +12,7 @@ export const roomInfoSlice = createSlice({
     isCallingRoll: false,
     isChatRoomMuted: false,
     isSpeechApplicationForbidden: false,
-    speechMode: 'ApplySpeech',
+    speechMode: 'FreeSpeech',
     startTime: 0,
   },
   reducers: {

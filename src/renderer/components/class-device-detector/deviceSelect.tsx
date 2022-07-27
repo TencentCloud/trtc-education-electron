@@ -24,6 +24,40 @@ const getDeviceList = async (deviceType: any) => {
   return deviceList;
 };
 
+const getCurrentDevice = async (deviceType: any) => {
+  let currentDevice: TRTCDeviceInfo | null = null;
+  switch (deviceType) {
+    case 'camera':
+      currentDevice = await tuiRoomCore.getCurrentCamera();
+      break;
+    case 'microphone':
+      currentDevice = await tuiRoomCore.getCurrentMicrophone();
+      break;
+    case 'speaker':
+      currentDevice = await tuiRoomCore.getCurrentSpeaker();
+      break;
+    default:
+      break;
+  }
+  return currentDevice;
+};
+
+const setCurrentDevice = async (deviceType: any, deviceID: string) => {
+  switch (deviceType) {
+    case 'camera':
+      tuiRoomCore.setCurrentCamera(deviceID);
+      break;
+    case 'microphone':
+      tuiRoomCore.setCurrentMicrophone(deviceID);
+      break;
+    case 'speaker':
+      tuiRoomCore.setCurrentSpeaker(deviceID);
+      break;
+    default:
+      break;
+  }
+};
+
 interface DeviceSelectProps {
   deviceType: any;
   onChange: any;
@@ -32,13 +66,14 @@ interface DeviceSelectProps {
 
 function DeviceSelect(props: DeviceSelectProps) {
   const { deviceType, onChange, choseDevice } = props;
-  const [deviceList, setDeviceList] = useState([]);
+  const [deviceList, setDeviceList] = useState<Array<TRTCDeviceInfo>>([]);
   const [activeDevice, setActiveDevice] = useState({});
   const [activeDeviceId, setActiveDeviceId] = useState('');
 
   useEffect(() => {
     async function getDeviceListData() {
       const list = await getDeviceList(deviceType);
+      const currentDevice = await getCurrentDevice(deviceType);
       const deviceIdList = list.map((item: { deviceId: any }) => item.deviceId);
       // @ts-ignore
       setDeviceList(list);
@@ -49,7 +84,11 @@ function DeviceSelect(props: DeviceSelectProps) {
           )[0]
         );
         setActiveDeviceId(choseDevice.deviceId);
+      } else if (currentDevice) {
+        setActiveDevice(currentDevice);
+        setActiveDeviceId(currentDevice.deviceId);
       } else {
+        setCurrentDevice(deviceType, list[0].deviceId);
         setActiveDevice(list[0]);
         setActiveDeviceId(list[0].deviceId);
       }
@@ -62,29 +101,31 @@ function DeviceSelect(props: DeviceSelectProps) {
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       onChange && onChange(activeDevice);
     }
-  }, [activeDevice]);
-
-  const deviceChange = (options: Record<string, any>) => {
-    logger.log('deviceSelect deviceChange', options);
-    setDeviceList(options.type);
-  };
+  }, [activeDevice, onChange]);
 
   useEffect(() => {
+    const deviceChange = async (options: Record<string, any>) => {
+      logger.log('deviceSelect deviceChange', options);
+      if (options.type === deviceType) {
+        const list = await getDeviceList(deviceType);
+        setDeviceList(list);
+      }
+    };
+
     tuiRoomCore.on(ETUIRoomEvents.onDeviceChange, deviceChange);
 
     return () => {
       tuiRoomCore.off(ETUIRoomEvents.onDeviceChange, deviceChange);
     };
-  }, [activeDevice]);
+  }, [deviceType]);
 
   const handleChange = (event: { target: { value: any } }) => {
     const deviceID = event.target.value;
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    const activeDevice = deviceList.find(
-      (item) => (item as any).deviceId === deviceID
+    const newActiveDevice = deviceList.find(
+      (item: TRTCDeviceInfo) => item.deviceId === deviceID
     );
     // @ts-ignore
-    setActiveDevice(activeDevice);
+    setActiveDevice(newActiveDevice);
     setActiveDeviceId(deviceID);
   };
 
@@ -95,9 +136,9 @@ function DeviceSelect(props: DeviceSelectProps) {
         value={activeDeviceId}
         onChange={handleChange}
       >
-        {deviceList.map((item, index) => (
+        {deviceList?.map((item: TRTCDeviceInfo) => (
           // eslint-disable-next-line react/no-array-index-key
-          <option value={(item as any).deviceId} key={index}>
+          <option value={item.deviceId} key={item.deviceId}>
             {(item as any).deviceName}
           </option>
         ))}
