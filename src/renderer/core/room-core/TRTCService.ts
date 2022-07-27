@@ -181,8 +181,6 @@ class TRTCService {
     param.userDefineRecordId = ''; // 云端录制
     this.rtcCloud.setDefaultStreamRecvMode(true, false); // 默认接收音频，不接收视频
     this.rtcCloud.enterRoom(param, TRTCAppScene.TRTCAppSceneVideoCall);
-
-    this.rtcCloud.setRenderMode(2); // 1-webgl 2-yuvcanvs
   }
 
   public async exitRoom(): Promise<TUIRoomResponse<any>> {

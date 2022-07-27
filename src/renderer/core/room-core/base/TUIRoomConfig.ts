@@ -1,7 +1,7 @@
 import { ETUIRoomRole, ETUISpeechMode } from '../types.d';
 
 class TUIRoomConfig {
-  speechMode = ETUISpeechMode.APPLY_SPEECH; // 发言模式
+  speechMode = ETUISpeechMode.FREE_SPEECH; // 发言模式
 
   isChatRoomMuted = false; // 是否禁止IM聊天
 
@@ -16,7 +16,7 @@ class TUIRoomConfig {
   startTime = 0; // 开始时间
 
   reset() {
-    this.speechMode = ETUISpeechMode.APPLY_SPEECH;
+    this.speechMode = ETUISpeechMode.FREE_SPEECH;
     this.isChatRoomMuted = false;
     this.isSpeechApplicationForbidden = false;
     this.isAllCameraMuted = false;

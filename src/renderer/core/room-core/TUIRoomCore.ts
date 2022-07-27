@@ -111,6 +111,7 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
     this.onFirstVideoAvailable = this.onFirstVideoAvailable.bind(this);
     this.onTestMicVolume = this.onTestMicVolume.bind(this);
     this.onTestSpeaker = this.onTestSpeaker.bind(this);
+    this.onDeviceChange = this.onDeviceChange.bind(this);
     this.bindTRTCEvent();
 
     this.onReceiveChatMessage = this.onReceiveChatMessage.bind(this);
@@ -277,7 +278,7 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
    */
   async createRoom(
     roomID: string,
-    mode = ETUISpeechMode.APPLY_SPEECH
+    mode = ETUISpeechMode.FREE_SPEECH
   ): Promise<TUIRoomResponse<any>> {
     logger.log(`${TUIRoomCore.logPrefix}createRoom`, roomID, mode);
     this.checkLogin();
@@ -925,6 +926,7 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
    * /////////////////////////////////////////////////////////////////////////////////
    */
   bindTRTCEvent() {
+    logger.debug(`${TUIRoomCore.logPrefix}bindTRTCEvent`);
     this.trtcService.on('onError', this.onTRTCError);
     this.trtcService.on('onWarning', this.onTRTCWarning);
     this.trtcService.on('onRemoteUserEnterRoom', this.onRemoteUserEnterRoom);
@@ -939,6 +941,7 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
   }
 
   unbindTRTCEvent() {
+    logger.debug(`${TUIRoomCore.logPrefix}unbindTRTCEvent`);
     this.trtcService.off('onError', this.onTRTCError);
     this.trtcService.off('onWarning', this.onTRTCWarning);
     this.trtcService.off('onRemoteUserEnterRoom', this.onRemoteUserEnterRoom);
@@ -1092,6 +1095,12 @@ class TUIRoomCore implements ITUIRoomCore, ITUIRoomCoordinator {
     type: TRTCDeviceType,
     state: TRTCDeviceState
   ) {
+    logger.debug(
+      `${TUIRoomCore.logPrefix}onDeviceChange:`,
+      deviceId,
+      type,
+      state
+    );
     this.emitter.emit(ETUIRoomEvents.onDeviceChange, {
       deviceId,
       type,
