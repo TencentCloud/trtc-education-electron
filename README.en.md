@@ -137,8 +137,16 @@ yarn start
 
 Open `trtc-education-electron` in a terminal and run the command below to create an installer. After it is created, find the installer in `trtc-education-electron/build/release`, and then install and run it.
 
+- Create single CPU architecture(X64) installer for Windows or Mac OS
+
 ```
 yarn package
+```
+
+- Creat dual CPU architecture(X64 and ARM64) installer for Mac OS. Only Electron version 11 and later supported.
+
+```
+yarn package:mac-universal
 ```
 
 > Note: You need Mac PC to create a macOS installer and Windows PC to create a Windows installer.
