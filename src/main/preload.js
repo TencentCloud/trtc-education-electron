@@ -10,6 +10,11 @@ const { ipcRenderer, shell } = require('electron');
 const TRTCCloud = require('trtc-electron-sdk').default;
 const genTestUserSig = require('./config/generateUserSig');
 
+// 打印来自主进程的奔溃 dump 文件存放目录
+ipcRenderer.on('crash-file-path', (event, args) => {
+  console.warn('crash-file-path:', args);
+});
+
 window.electron = {
   TRTCCloud,
   ipcRenderer,
@@ -20,3 +25,9 @@ window.electron = {
     }
   },
 };
+
+// // crash test
+// setTimeout(() => {
+//   console.warn('---------------test crash');
+//   process.crash();
+// }, 10 * 1000);

@@ -21,6 +21,7 @@ const targetPlatform = (function(){
 })();
 console.log('targetPlatform', targetPlatform);
 
+// 此处的路径，需要与 package.json 中 electron-builder 配置中 .node 文件加载路径一只
 const getRewritePath = function() {
   console.log('getRewritePath:', process.env.NODE_ENV);
   let rewritePathString = '';
