@@ -40,11 +40,10 @@ function Home() {
   }, [dispatch, roomID]);
 
   function handleRoomIDChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const newRoomID = +event.target.value;
-    if (isNaN(newRoomID)) {
-      return;
+    const re = /^([1-9]{1}[0-9]{0,8})$/g;
+    if (event.target.value === '' || re.test(event.target.value)) {
+      dispatch(updateRoomID(event.target.value.toString()));
     }
-    dispatch(updateRoomID(newRoomID));
   }
 
   function handleUserIDChange(event: React.ChangeEvent<HTMLInputElement>) {
