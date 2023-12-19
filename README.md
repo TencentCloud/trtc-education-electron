@@ -37,7 +37,10 @@ _[English](README.en.md) | 简体中文_
 
 # 环境准备
 
-> 注意：只支持 Windows 和 Mac 操作系统。
+> ! 注意：
+
+- 只支持 Windows 和 Mac 操作系统。
+- **<span style="color:red">电脑必现有物理摄像头、麦克风、扬声器设备才能正常运行项目。</span>**
 
 本代码工程的运行依赖于 node.js 和 yarn。
 
