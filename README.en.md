@@ -37,7 +37,10 @@ This document focuses on how to run the source code of this project. To learn mo
 
 # Prepare the runtime environment
 
-> ! Note: Only Microsoft Windows OS and Mac OS supported.
+> ! Note:
+
+- Only Microsoft Windows OS and Mac OS supported.
+- **<span style="color:red">The computer must have physical cameras, microphones, and speaker devices to run the project normally.</span>**
 
 Node.js and Yarn are required for the source code to run.
 

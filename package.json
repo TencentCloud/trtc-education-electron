@@ -1,7 +1,7 @@
 {
   "name": "trtc-education-electron",
   "productName": "trtcElectronEducationExternal",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "TRTC Education Electron based on Tencent RTC, Tencent IM and Electron for teachers and students interacting and coordinating remotely",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
@@ -258,7 +258,7 @@
     "regenerator-runtime": "^0.13.5",
     "tim-js-sdk": "^2.16.1",
     "tim-upload-plugin": "^1.0.3",
-    "trtc-electron-sdk": "^10.6.403",
+    "trtc-electron-sdk": "^11.4.503",
     "tsignaling": "^0.10.0"
   },
   "devEngines": {

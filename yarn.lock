@@ -6430,6 +6430,11 @@ hpack.js@^2.1.6:
     readable-stream "^2.0.1"
     wbuf "^1.1.0"
 
+hpagent@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hpagent/-/hpagent-1.2.0.tgz#0ae417895430eb3770c03443456b8d90ca464903"
+  integrity sha512-A91dYTeIB6NoXG+PxTQpCCDDnfHsW9kc06Lvpu1TEe9gnd6ZFeiBoRO9JvzEv6xK7EX97/dUE8g/vBMTqTS3CA==
+
 hsl-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hsl-regex/-/hsl-regex-1.0.0.tgz#d49330c789ed819e276a4c0d272dffa30b18fe6e"
@@ -11783,20 +11788,22 @@ trim-repeated@^1.0.0:
   dependencies:
     escape-string-regexp "^1.0.2"
 
-trtc-electron-sdk@^10.6.403:
-  version "10.6.403"
-  resolved "https://registry.yarnpkg.com/trtc-electron-sdk/-/trtc-electron-sdk-10.6.403.tgz#3a9cf4b1228830e1f45ce657673566cca2f241de"
-  integrity sha512-MsnR+YNSW9tpiX7MeMJydq8nxmjoa1RJqNYYLPq7jVI+7TF/RjdqwSCxk3MgN6g41pY8y0qm+nhgvTKcnU0Mqw==
+trtc-electron-sdk@^11.4.503:
+  version "11.4.503"
+  resolved "https://registry.yarnpkg.com/trtc-electron-sdk/-/trtc-electron-sdk-11.4.503.tgz#eac65660cf9a642b5b4275f5b6cd60cc7c9fc5f4"
+  integrity sha512-YmAnOGNvjTyMvJT5YwEBJTipeHnzTVVFBz/UBobEwMimZze9FyB2kBdQqbHIaAc6RVgk/YYWU3f7U2TFfoIstg==
   dependencies:
     cos-nodejs-sdk-v5 "^2.8.2"
     download "^8.0.0"
     events "^3.2.0"
     fs-extra "^9.0.1"
     fs-sync "^1.0.6"
+    hpagent "^1.2.0"
     lodash.isequal "^4.5.0"
     rimraf "^3.0.2"
     semver "^6.0.0"
     signale "^1.4.0"
+    yuv-buffer "^1.0.0"
     yuv-canvas "^1.2.6"
 
 truncate-utf8-bytes@^1.0.0:
@@ -12696,6 +12703,11 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+yuv-buffer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/yuv-buffer/-/yuv-buffer-1.0.0.tgz#09a454858d74df2bc31cd588edd70ffcb86bfc9a"
+  integrity sha512-5r5u7g7Dbdrwao/z8c4harQIpZwaNuzXjQXtgdFxTjr5Pm2eMmxIuckkKOONEM7fkiMNkeffXs6EPNESvAVzVg==
 
 yuv-canvas@^1.2.6:
   version "1.2.11"

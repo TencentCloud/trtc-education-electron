@@ -19,7 +19,16 @@ class Monitor {
   private reportedEventMap: Record<string, any> = {};
 
   constructor(options?: Record<string, any>) {
-    this.aegis = (window as any).aegis;
+    // @ts-ignore
+    this.aegis = new Aegis({
+      id: 'iHWefAYqvKcUtkTAXO', // 项目ID，即上报id
+      uin: '', // 用户唯一 ID（可选）
+      spa: true, // 是否单页面应用
+      reportApiSpeed: true, // 接口测速
+      reportAssetSpeed: true, // 静态资源测速
+      pagePerformance: true, // 开启页面测速
+    });
+
     if (options) {
       const { sdkAppId, uin } = options;
       this.sdkAppId = sdkAppId || 0;
