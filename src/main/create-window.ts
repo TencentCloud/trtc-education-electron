@@ -1,7 +1,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
 import { resolveHtmlPath } from './util';
 import { EUserEventNames } from '../constants';
 import store from './store';
@@ -126,6 +126,13 @@ export async function createWindow(
 
   newWindow.on('closed', () => {
     newWindow = null;
+  });
+
+  newWindow.webContents.setWindowOpenHandler((details) => {
+    if (details.url.startsWith('https:') || details.url.startsWith('http:')) {
+      shell.openExternal(details.url);
+    }
+    return { action: 'deny' };
   });
 
   return newWindow;
